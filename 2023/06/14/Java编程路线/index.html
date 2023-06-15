@@ -16,23 +16,24 @@
   <meta name="author" content="Peter Xu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="Java后端技术体系第一部分：Java基础 变量  控制结构  顺序结构 分支 循环   OOP  封装 继承 多态   数组  Java API  异常处理  集合  泛型  反射  网络通信   &#x3D;&#x3D;第二部分：Java高级&#x3D;&#x3D;Java多线程&#x2F;高并发 并发基础 互斥同步 非阻塞同步 指令重排 synchronized volatile   线程 锁 自旋锁 偏向锁 可重入锁   线程池 并发容器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/11/09/hello-world/index.html">
+<meta property="og:title" content="Java编程路线">
+<meta property="og:url" content="http://example.com/2023/06/14/Java%E7%BC%96%E7%A8%8B%E8%B7%AF%E7%BA%BF/index.html">
 <meta property="og:site_name" content="XT-CODE-WORLD">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Java后端技术体系第一部分：Java基础 变量  控制结构  顺序结构 分支 循环   OOP  封装 继承 多态   数组  Java API  异常处理  集合  泛型  反射  网络通信   &#x3D;&#x3D;第二部分：Java高级&#x3D;&#x3D;Java多线程&#x2F;高并发 并发基础 互斥同步 非阻塞同步 指令重排 synchronized volatile   线程 锁 自旋锁 偏向锁 可重入锁   线程池 并发容器">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-09T12:47:28.701Z">
-<meta property="article:modified_time" content="2022-11-09T12:45:20.303Z">
+<meta property="article:published_time" content="2023-06-14T15:37:56.000Z">
+<meta property="article:modified_time" content="2023-06-14T15:39:36.230Z">
 <meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Hello World - XT-CODE-WORLD</title>
+  <title>Java编程路线 - XT-CODE-WORLD</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="Java编程路线"></span>
           
         </div>
 
@@ -224,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-09 20:47" pubdate>
-          2022年11月9日 晚上
+        <time datetime="2023-06-14 23:37" pubdate>
+          2023年6月14日 晚上
         </time>
       </span>
     
@@ -236,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          1.4k 字
         
       </span>
     
@@ -247,7 +248,7 @@
         
         
         
-          4 分钟
+          13 分钟
         
       </span>
     
@@ -285,24 +286,239 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">Java编程路线</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="Java后端技术体系"><a href="#Java后端技术体系" class="headerlink" title="Java后端技术体系"></a>Java后端技术体系</h1><h2 id="第一部分：Java基础"><a href="#第一部分：Java基础" class="headerlink" title="第一部分：Java基础"></a>第一部分：Java基础</h2><ul>
+<li><p>变量</p>
+</li>
+<li><p>控制结构</p>
+<ul>
+<li>顺序结构</li>
+<li>分支</li>
+<li>循环</li>
+</ul>
+</li>
+<li><p>OOP</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+</li>
+<li><p>数组</p>
+</li>
+<li><p>Java API</p>
+</li>
+<li><p>异常处理</p>
+</li>
+<li><p>集合</p>
+</li>
+<li><p>泛型</p>
+</li>
+<li><p>反射</p>
+</li>
+<li><p>网络通信</p>
+</li>
+</ul>
+<h2 id="第二部分：Java高级"><a href="#第二部分：Java高级" class="headerlink" title="==第二部分：Java高级=="></a>==第二部分：Java高级==</h2><h3 id="Java多线程-高并发"><a href="#Java多线程-高并发" class="headerlink" title="Java多线程/高并发"></a>Java多线程/高并发</h3><ul>
+<li>并发基础<ul>
+<li>互斥同步</li>
+<li>非阻塞同步</li>
+<li>指令重排</li>
+<li>synchronized</li>
+<li>volatile</li>
+</ul>
+</li>
+<li>线程</li>
+<li>锁<ul>
+<li>自旋锁</li>
+<li>偏向锁</li>
+<li>可重入锁</li>
+</ul>
+</li>
+<li>线程池</li>
+<li>并发容器</li>
+<li>JUC<ul>
+<li>executor</li>
+<li>collections</li>
+<li>locks</li>
+<li>atomic（原子类）</li>
+<li>tools（CountDownLatch，Exchanger，ThreadLocal，CyclicBarrier）</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据结构和算法"><a href="#数据结构和算法" class="headerlink" title="数据结构和算法"></a>数据结构和算法</h3><ul>
+<li>数据结构<ul>
+<li>数组（稀疏数组）</li>
+<li>队列</li>
+<li>栈</li>
+<li>链表</li>
+<li>树</li>
+<li>散列</li>
+<li>堆</li>
+<li>图</li>
+</ul>
+</li>
+<li>算法<ul>
+<li>排序算法（8种）</li>
+<li>查找</li>
+<li>分治算法</li>
+<li>动态规划（背包问题）</li>
+<li>回溯算法（骑士周游问题）</li>
+<li>贪心算法</li>
+<li>KMP</li>
+<li>Prim</li>
+<li>kruskal</li>
+<li>弗洛伊德算法</li>
+<li>迪杰斯特拉算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="设计模式（23种）"><a href="#设计模式（23种）" class="headerlink" title="设计模式（23种）"></a>设计模式（23种）</h3><p>常用的8种：</p>
+<ul>
+<li>单例模式</li>
+<li>观察者模式</li>
+<li>工厂模式</li>
+<li>适配器模式</li>
+<li>装饰者模式</li>
+<li>代理模式</li>
+<li>模板模式</li>
+<li>责任链模式</li>
+<li>其他（桥接模式、原型模式、组合模式）</li>
+</ul>
+<h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><ul>
+<li>JVM体系</li>
+<li>类加载过程/机制</li>
+<li>双亲委派机制/沙箱安全机制</li>
+<li>JMM（Java内存模式）</li>
+<li>字节码执行的过程/机制</li>
+<li>GC(垃圾回收机制)</li>
+<li>JVM性能监控和故障定位</li>
+<li>JVM调优</li>
+</ul>
+<h2 id="第三部分：JavaWeb"><a href="#第三部分：JavaWeb" class="headerlink" title="第三部分：JavaWeb"></a>第三部分：JavaWeb</h2><h3 id="前端基础"><a href="#前端基础" class="headerlink" title="前端基础"></a>前端基础</h3><ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Javascript</li>
+<li>Ajax</li>
+<li>Jquery</li>
+</ul>
+<h3 id="前端框架（弱化）"><a href="#前端框架（弱化）" class="headerlink" title="前端框架（弱化）"></a>前端框架（弱化）</h3><ul>
+<li>VUE</li>
+<li>React</li>
+<li>Angular</li>
+<li>bootstrap</li>
+<li>Node.js</li>
+</ul>
+<h3 id="JavaWeb后端"><a href="#JavaWeb后端" class="headerlink" title="JavaWeb后端"></a>JavaWeb后端</h3><ul>
+<li>Tomcat</li>
+<li>Servlet</li>
+<li>JSP</li>
+</ul>
+<h2 id="第四部分：主流框架和项目管理"><a href="#第四部分：主流框架和项目管理" class="headerlink" title="第四部分：主流框架和项目管理"></a>第四部分：主流框架和项目管理</h2><ul>
+<li>Linux</li>
+<li>Nginx</li>
+<li>==SSM==<ul>
+<li>Spring</li>
+<li>SpringMVC</li>
+<li>MyBatis</li>
+</ul>
+</li>
+<li>项目管理<ul>
+<li>Maven</li>
+<li>git&amp;Github</li>
+</ul>
+</li>
+<li>数据库<ul>
+<li>Redis</li>
+<li>Mysql</li>
+<li>Oracle</li>
+</ul>
+</li>
+<li>其他框架<ul>
+<li>WebService(SOA)</li>
+<li>Activiti(工作流框架)</li>
+<li>Shiro(安全框架)</li>
+<li>Spring  Security(安全框架)</li>
+<li>JPA(持久化)</li>
+<li>SpringData(持久层的通用解决方案)</li>
+</ul>
+</li>
+</ul>
+<h2 id="第五部分：分布式-微服务-并行架构"><a href="#第五部分：分布式-微服务-并行架构" class="headerlink" title="第五部分：分布式|微服务|并行架构"></a>第五部分：分布式|微服务|并行架构</h2><ul>
+<li>Netty</li>
+<li>Dubbo（RPC框架）</li>
+<li>FastDFS（分布式的文件系统）</li>
+<li>Docker（应用容器引擎）</li>
+<li>==Spring家族==<ul>
+<li>SpringBoot</li>
+<li>SpringCloud<ul>
+<li>Nacos（阿里巴巴服务发现，配置，管理）</li>
+<li>Seata（阿里巴巴，分布式事务的中间件）</li>
+<li>Sentinel（阿里巴巴，流量控制，融断，系统负载保护）</li>
+<li>Gateway（网关，限流，日志，监控，鉴权）</li>
+<li>OpenFeign（服务间调用）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>搜索引擎<ul>
+<li>ElasticSearch</li>
+<li>Solr</li>
+</ul>
+</li>
+<li>==中间件==<ul>
+<li>Mycat（数据库中间件，分库分表）</li>
+<li>消息中间件<ul>
+<li>ActiveMQ</li>
+<li>RabbitMQ</li>
+<li>KafKa</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>日志分析与监控（ELK）<ul>
+<li>ElasticSearch（搜索，存储数据）</li>
+<li>LogStash（分析日志）</li>
+<li>Kibana（可视化）</li>
+</ul>
+</li>
+<li>Zookeeper（一致性服务：比如 配置维护，域名维护，分布式同步）</li>
+</ul>
+<h2 id="第六部分：DevOps（开发运维一体化）自动化部分管理项目，解决CI-CD"><a href="#第六部分：DevOps（开发运维一体化）自动化部分管理项目，解决CI-CD" class="headerlink" title="第六部分：DevOps（开发运维一体化）自动化部分管理项目，解决CI/CD"></a>第六部分：DevOps（开发运维一体化）自动化部分管理项目，解决CI/CD</h2><ul>
+<li>k8s(让部署容器化的应用简单高效)</li>
+<li>普罗米修斯（prometheus）(系统监控和报警)</li>
+<li>Jenkins（监控持续的工作【部署，集成，交付】）</li>
+<li>Harbor（容器的镜像仓库）</li>
+<li>GitLab</li>
+<li>SonarQube(项目工程代码质量检测)</li>
+</ul>
+<h2 id="第七个部分：大数据技术（可以弱化）"><a href="#第七个部分：大数据技术（可以弱化）" class="headerlink" title="第七个部分：大数据技术（可以弱化）"></a>第七个部分：大数据技术（可以弱化）</h2><ul>
+<li>Hadoop</li>
+<li>Hive</li>
+<li>Impals</li>
+<li>spark</li>
+<li>flink</li>
+</ul>
+<h2 id="第八个部分：项目"><a href="#第八个部分：项目" class="headerlink" title="==第八个部分：项目=="></a>==第八个部分：项目==</h2><ul>
+<li>电商</li>
+<li>金融</li>
+<li>教育</li>
+<li>直播</li>
+<li>CRM，ERP</li>
+</ul>
+<h2 id="第九个部分：大厂高频面试题"><a href="#第九个部分：大厂高频面试题" class="headerlink" title="第九个部分：大厂高频面试题"></a>第九个部分：大厂高频面试题</h2><h2 id="第十个部分：底层源码-内核研究"><a href="#第十个部分：底层源码-内核研究" class="headerlink" title="第十个部分：底层源码/内核研究"></a>第十个部分：底层源码/内核研究</h2><h2 id="编程基础的扩展"><a href="#编程基础的扩展" class="headerlink" title="编程基础的扩展"></a>编程基础的扩展</h2><ul>
+<li>计算机网络</li>
+<li>操作系统</li>
+<li>编译原理</li>
+<li>离散数学</li>
+<li>数值分析</li>
+<li>计算机组成原理</li>
+<li>汇编语言</li>
+</ul>
 
                 
               </div>
@@ -311,6 +527,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+    </div>
   
 </div>
 
@@ -320,8 +564,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2022/11/09/hello-world/</div>
+      <div>Java编程路线</div>
+      <div>http://example.com/2023/06/14/Java编程路线/</div>
     </div>
     <div class="license-meta">
       
@@ -333,7 +577,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月9日</div>
+          <div>2023年6月14日</div>
         </div>
       
       
@@ -365,15 +609,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/14/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                      <a href="/2023/06/15/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%93%E9%A2%983/" title="二叉树专题3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
+                        <span class="hidden-mobile">二叉树专题3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/06/14/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                        <span class="hidden-mobile">测试文章</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
