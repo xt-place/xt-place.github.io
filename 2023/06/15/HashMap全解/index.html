@@ -16,25 +16,27 @@
   <meta name="author" content="Peter Xu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="从应用到底层看破HashMap（源码精讲一）   作为面试中最喜欢考察的知识点之一和在实际中最常用到的Map集合，HashMap为什么这么让人着谜，对应的数据结构是什么，有哪些具体的应用场景，底层的实现逻辑是什么？下文的分析和源码都是来自于JDK8。  HashMap是什么哈希表HashMap是Java程序员使用频率最高的键值对集合，对应着哈希表这一数据结构，在学习HashMap之前，我们需要先复">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="http://example.com/2023/06/14/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="一篇文章搞懂HashMap">
+<meta property="og:url" content="http://example.com/2023/06/15/HashMap%E5%85%A8%E8%A7%A3/index.html">
 <meta property="og:site_name" content="XT-CODE-WORLD">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="从应用到底层看破HashMap（源码精讲一）   作为面试中最喜欢考察的知识点之一和在实际中最常用到的Map集合，HashMap为什么这么让人着谜，对应的数据结构是什么，有哪些具体的应用场景，底层的实现逻辑是什么？下文的分析和源码都是来自于JDK8。  HashMap是什么哈希表HashMap是Java程序员使用频率最高的键值对集合，对应着哈希表这一数据结构，在学习HashMap之前，我们需要先复">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUcAAACaCAMAAAANQHocAAAAt1BMVEX////gAwjfAAAsicToWlzukpMUgsHwqaomh8PgAAQdhMIAf8D+9/cRgcHvm5zjLTDoVVfrb3D/+/v1vL2bwuDp8vj88PD0+fzxn6D75OXM4fDj7PX4zc7se3zui4z86Oj62do+k8n2xMW30+j50tPrcnTlQEL1trfhExbiHSDmS03kNDaJudvH3u7sgIGqy+RhpNF5sNfjJSjoZGVUm8xdoM+BtNmgxeFxrNXkOz3lRUezzuXujpBIgTV1AAAON0lEQVR4nO1diXqiOhTW0CKy1LpXcEO6uGDdlU77/s91EyAhrFKxctX8370zI+Jp+JuTsyYWCgwMDAwMDFeP11reI7gNfHzmPYLbQBfIeQ/hJjAEH3kP4SbQAdW8h3ATaIF13kO4CQxAmS2QZ0AHgGHeY7gFvALQzXsMt4A6AKO8x3AL6DEez4IvxuM5MARltj6eAX3I4zDvQVw/5AkAReY/ZkYJFMEs70FcP2oTyCNLnGXGDygWmbnOjA4oF8sg71FcPWprNB37eQ/j6lGFNJZBK+9hXDv6kEY2HTMDeuCQxjVzHrOhh2gsM2OdERuk1EXwlPc4rhuDfw6NvbwHct3ojh0a3/IeyHXjBbDZeAa8IQsDTUxUXF1/Y8nIdGi925OxHOE4dqugytygdBhOXBofA290HiugwiZjStSBS+OL73Kt/gwA6LMWvpR4wTSW6Ku1lzVksfKa16iuDp+2hSkCP41PAIFlc9Oi5sQwkEa6U++jDOcoKLKVMS3kf5jGunex+w5ZLIMNS56lRasSprH2idZLEDA6DAnoTMI0Dit26oz1AaRHpximsWQbbzAZ5DiuKwOmsUyZGDuPWwRTFsGkRsvJ70DWPIfnzclVPDAa02OGafTStj2HxmcWwqRHFdPo5RsfHRorbDamRwnT+I9cGjlrI6u5/gJ4cQQTwprsOEG0Q85wDH1sqruBS2CT46iuDjL2HL1EhOwmxIf5jer6UMcOuGeZnQWTWi4ZjsNVazqG/mJlrt+j6mZuKdPsZiF/8hvUFaLqOtzelY47Q9l8/A1c20xVB7suj8/xH2II4SPUyNPFjlAnv1FdHxy/h+ZxiOOb7Irdag06CIM7CNN/Qu2ijp05x4ScAhd3YLPsuNAXu8zCAfeJeMCSgl0Ft4gS8LvhhSf36Yv++usJuCseofbBJ6WKMAPCI8hYU7gvHgeoQk33Om4IkRl9n/viEWl2mT7uaOhamsyafWc8oqDGV6TukQk5yZQRvzce5QoAY+o1KXwVs/UA3BuPUJP9zVF1rNmgmEXs3fGIGh99Kuxpdpbiwv3xiFoffQ9bwRRkOd7sDnlEB8zQ3iK22SDLvuF75BG64779Mi+Ygwwi75JHeQZ8rcvvgPF4ElrrCf1yBP5Qr+VB/fHz4X29rrxv+h/+foOajBEhMuY9eTB66m+mX7OvafXnI+f+hY4vv1Wz8z6ZspDRPNaGL5s18OH5g8qTtMoVB5PwUaidydp576tFyXsKySvlmvEc+mrWdukmUxU7isdub4aetEijDMCMSpSMMR3TkMRX/Nb7EXmVXHc8v9KabZ+WkulU1zCPdRg5keidBqBS8j/EeQ1p9ghL3ByVl+uaPKL2d0BfnGr6OQVhHh8iH9qZQ2RReSU8hhQb50Zx9PUFYsTR8vJA3dOvfyChN7zdbh8XFuYRN7eVyVJW9h6chE6kr/UhKPENF+Fc16KfSl4eIEUZtBRFj6Stmjtd17er72ayrDCPQ6d1H4D1Q/Wz3/+svntP7kWmOCoFxaA6uBLB2H3D1nNH3lv/8bH/Rsu71OEa2vywP2hx727iaDSWy5W1FSRR4Ll94qyMsDMTtMWuP2rhR6wN+sRIkOTSiFwJWAsZ707BZkYGQXmd3rmyp6mgNraKaCVMqBEAMTsKXepUSxEEUZgn/JAIHp/XT8EyZJckl/CRdK1iTHQ/wNEqWfumYXkjIq+SMLYzoLnYSRJnqkn3tMC/oyZG1QWOUxbxN6SMZ17I9MM/Elc2gqrZxdcTvZqwvD+ABicir+yMI7e9p9mY2YRECnz8jEwbF2LNJgvJB2HCb+gesZlJJgikojsD2sZOFAWBS1JGG6N0I5iLHCdwsW+n5fEzuO9kUMZX/L9OvJX0yBn7b/jTf/TdEAedF9CDHzGzMWhrxiFoVpBm87GanZZHPP28KsYUX5nRil3DvexHlOUl+Hs5KzQdzh4IYfnLD7a1+cLccaK0CllnE01IPe6DaXnEjrcX05SIYg+p+zpB/Y9B9y95bEoC50DcGilmZLutqcbBtHRB4nlRFPlthIv0jX41fJyItDwOQzx2iM2loxKyReWIY9j6Ux45ERMpiIq+3DcWc1XTmhQ0TVPnxqJh7q2dzimKIqLVFHo3oiJuv6OEOjzG/VZO55EEfL7jed0dU0eP7G1h9+hP9LrZ0BUeWRmXSzjFFJ63iUKvIV3wNbyDd8iz+YOv9d2q8a3GUNWweYxzxjPw6DUZUe4hpufYYYqya7D/zBFvGg1LFx09hezZ//lg0wnp4yWF21qNhaElx9FLZLeEuHfT8tgN89ghPHoV9NeUy6Pnrv9tQNNW59+N/XKru6y5QDTq2+XKXBjzuPkXlISmsriKezuRx9rrR+nlczOtFElITLezjsOK/ZToPcrdj5d+dTpbjz15FwgMXbTJ4pgmgRPEgodqrcQGRrE8yqPPipe9LpOAmOLxMRyUuGtmOAtUkOs9OiN+yQD7HGjraGHdxb4fw2OnPw5msMM8DgmP2Jkm2hr8rQw+4+RdCY+29yjGZoyieZQ/ox86wGNhgj+Mmwfr+MLQ90OS5F0Hj3PbWP8yT9Edk6cuk+xrFI8kWMRf8IC9Hv+u8NeJJw8E5V2CR9WMn0ipoCF/lDcT7ojg8QM/pP3QxcnXQ7XXfwvba8+I42yDvHZ59OXS/PLGX9NN9a1H5P09j4YuNbJJaCKXR0kUElHnIqYUPJdesQVpRfEoE8V2Sr+veHmkvR5K3rT0iieqfDEeLV4QT8tWYGgcdDbFBKUuRPA4IBmtzZC6L5JHL2szs4vRbhURlKk2pA7ArtBDpLy/5nEF/RXxWArSQVubR92oQhpFPTEVHMEjOQrDn7CJ5nFENHaIXropIF9Rm+R7/bXBS/GoSXYgaCbOyKZqLMwl9NV53gq9aUCvXUouzhTCPOLsA/jy3ydH8ugdh4NCmqgYhTTFBTzKS/E4V5y8j8JZB0PVXBe83XTSFAfT2ukwMFRQoM2h2FvkAhNvLwni7riZCvKIfetgOTeaR+/jqOhfwhpMqTWuugabPi6m124m0s5WKLwiOVDsNIUTevshSFsqha5tJXF5RKVtBHmcYi4C98XwSNK7Y9mruNJTGat6sPn6Yjw2l4rIpQSiWl9RGcuFIq7SsBjmEathcMNdDI8DYoxfI1NhJK0T7AO6GI/Ie9QlPjzxQhwqir5faNRCqOr6Ia2lD/FI6SmNGB4L/7zPk7nZivhYMOC+II8FO4m24xQv4Yh4cxKRTu4MUmgt1IAtWTR+4b0HeKzhlynno5f/fiZq/RD1sYDZujCPDjRklvfWcrvVXWx31so8GPOM4U4hdj6G1seIPK6NAfkAYYauAMpkh3Mh+nNXEl8fRYjH6HrocBLDo7drglgUOraWx9HyusUb55FUU+m9OrWn6DwFglddcP/ydwcTeb7UxeNl8xQXQJDHPnlA73jO+szLeoV4JNUFfIO/5eiTyHuoUfJI696t8tj1GBuXkOEdvkzo3GH4e4NmPiKDBmrkyZuUZFve2ifvQjyqq6MNKplA9M6tVdU8WvypQvxXiMcfP4+BPhM5Rl75r+uFPmg7Kb415yyYBdf7D5oW3MMD/1F1cothHof0B8K7mEtH5F2CxzkMno/mzrR0gUsMiHkgKcNNYMFzptJL4TmGR5lW7Iiy40OMvOnFeGw7oUxsP25TNRpLXVCWp6cpZRLXDfGl2nOw0d75BoxeDI/extui/8wCLG8aIW9Ijkm+REMu7wbPgr609qbZaDQOB/iH7ZPrqJVCtPtYBNE8oSBrA9ftfQT80L3wqBRgP2vJWdzCPI6ocmpkG0U/Sd5F5iOJrelmALcfgI67RaFxGpMkJq7Qu6tajzOPmqmr8Z1NFWITbpRoPTwTRHdHDX48eeWAvEtsRpoLKVM+gijxkU1Sx0Cy1cHNTJ3RY2+zqfZHZzorfzh66lWrvaduLmfva5YiHsn32BkfzlqctEZGHe9+m9BMQUnInUEOxeUhmPFJjQ+yPN7BVzSoh6Xdwue06lFpM2h/rO9MKR/ihYf7ca4bbc1o7K2VaQRmWNPuu8WZs+12aZmH+cnTEAO3kfzdroE80DT2W0WAWpqtau1HkpPeWuPp+J5w13WhudhxkmRlnmJBmAkl8M3NTUfNEkSBzxCXxKIRu1OBNEPczLH4bUtCfnVsz2wGzJU4qYN/hMbybXxnSJOzvW0+U74hEpolhfssbHSoLay38u0CW8c7FKI2v5yOttrYSkJck9QPReONfEmaqpAYemmchUroPJl220pCdxBph7oVGgsa72UjkGd9OL2aivumUCJI4RoUiyGrXbPPUAJgejtfBDTn6MAPbTWS9KW5MNTmcSeo3fT6pgRJ4Z1NS6LI7X2r7T68TMpo98D6pr4HqL3YCoEGFHuflsKjzTLWykk9ujBNc7+yrOUOhjacqCgK6ZtyUpG8qC8Dmd+5zkX8Rjrj5z/as5sjUCzDKW5elqKTE4RA6pEE2gJHpyDtNhVIoWloAc7UpaRHrpO3o9F+2LH1ThclMsXsbXFxmR680wvOW0nQd/tG5EIw34mSde4g6TqANgPDFW9v7bZ2q20kRE63N8gdvg01OAMJtIbOK+JJCd5bRLvdpnYOpzreqICOW9ElnudOLt0wwBm9WHEK2te+YCyehqbjg6N1U08+tuYeoJpLC3mQWgoX0oF9wgK0UhzauA3/38WfQnVfUA9LUZIkZFC2qHrdWHwbhjGfqwTzuWF8LxqomO24PQ6DImrRzXv0/y801W80xUTF3qfgwf23a7lFh0NowHcrGFSyFTEGTedQFDuAQQGLwyKPXHanVLM30RYbRmBaOO6P5uI3PhADAwMDAwMDAwMDAwMDw/XiPzScD1ET9DgAAAAAAElFTkSuQmCC">
-<meta property="article:published_time" content="2023-06-14T15:22:06.000Z">
-<meta property="article:modified_time" content="2023-06-14T15:45:15.611Z">
+<meta property="og:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/f7fe16a2.png">
+<meta property="article:published_time" content="2023-06-15T07:07:07.000Z">
+<meta property="article:modified_time" content="2023-06-18T02:30:26.696Z">
 <meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="集合">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="data:image/png;base64,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">
+<meta name="twitter:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/f7fe16a2.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>测试文章 - XT-CODE-WORLD</title>
+  <title>一篇文章搞懂HashMap - XT-CODE-WORLD</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,13 +211,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://th.wallhaven.cc/small/zy/zyxvqy.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://w.wallhaven.cc/full/wq/wallhaven-wq8ylp.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text="一篇文章搞懂HashMap"></span>
           
         </div>
 
@@ -226,8 +228,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-14 23:22" pubdate>
-          2023年6月14日 晚上
+        <time datetime="2023-06-15 15:07" pubdate>
+          2023年6月15日 下午
         </time>
       </span>
     
@@ -238,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          653 字
         
       </span>
     
@@ -249,7 +251,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -287,14 +289,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">测试文章</h1>
+            <h1 style="display: none">一篇文章搞懂HashMap</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="/../images/image-20230614233143050.png" srcset="/img/loading.gif" lazyload alt="image-20230614233143050"></p>
-
+                <h1 id="从应用到底层看破HashMap（源码精讲一）"><a href="#从应用到底层看破HashMap（源码精讲一）" class="headerlink" title="从应用到底层看破HashMap（源码精讲一）"></a>从应用到底层看破HashMap（源码精讲一）</h1><blockquote>
+<p>  作为面试中最喜欢考察的知识点之一和在实际中最常用到的Map集合，HashMap为什么这么让人着谜，对应的数据结构是什么，有哪些具体的应用场景，底层的实现逻辑是什么？下文的分析和源码都是来自于JDK8。</p>
+</blockquote>
+<h2 id="HashMap是什么"><a href="#HashMap是什么" class="headerlink" title="HashMap是什么"></a>HashMap是什么</h2><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>HashMap是Java程序员使用频率最高的键值对集合，对应着哈希表这一数据结构，在学习HashMap之前，我们需要先复习一下哈希表的一些概念。</p>
+<p>哈希表相较于其他数据结构，得力于它的添加、删除、查找等功能的性能强大，我们常用的Redis非关系型数据库就是利用典型的键值对的数据结构存储（怪不得Redis这么好用）。在不考虑哈希冲突的情况下，只需要时间复杂度为O(1)就能够定位。</p>
+<p>但是哈希表有一个非常窒命的问题就是哈希冲突，解决哈希冲突有两个方法，一是开放寻址法（ThreadLocal就是利用这个，先挖一个坑），另一种就是我们今天要讲的HashMap的实现方法——链地址法。</p>
+<h3 id="Map大家族"><a href="#Map大家族" class="headerlink" title="Map大家族"></a>Map大家族</h3><p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2016/f7fe16a2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>从上面的图中我们可以看到，在Java.util.Map接口下，有四个常用的类，分别是HashMap、HashTable、LinkedHashMap、TreeMap。</p>
+<p>下面讲一下它们之间的区别吧：</p>
+<ul>
+<li>  <strong>HashMap</strong>：根据键的hashcode来存储数据，访问速度快，但是遍历顺序不确定。HashMap是线程不安全的，下文会具体的介绍为什么线程不安全，如何需要满足线程安全，</li>
+</ul>
+<h2 id="HashMap应用场景"><a href="#HashMap应用场景" class="headerlink" title="HashMap应用场景"></a>HashMap应用场景</h2><h2 id="HashMap的重要方法"><a href="#HashMap的重要方法" class="headerlink" title="HashMap的重要方法"></a>HashMap的重要方法</h2><h2 id="HashMap底层实现（代码全解）"><a href="#HashMap底层实现（代码全解）" class="headerlink" title="HashMap底层实现（代码全解）"></a>HashMap底层实现（代码全解）</h2><h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
                 
               </div>
             
@@ -315,6 +327,13 @@
   <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/Java/%E9%9B%86%E5%90%88/" class="category-chain-item">集合</a>
+  
+  
+
+  
 
       </span>
     
@@ -324,6 +343,15 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+        <a href="/tags/%E9%9B%86%E5%90%88/">#集合</a>
+      
+    </div>
+  
 </div>
 
 
@@ -332,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>http://example.com/2023/06/14/测试文章/</div>
+      <div>一篇文章搞懂HashMap</div>
+      <div>http://example.com/2023/06/15/HashMap全解/</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月14日</div>
+          <div>2023年6月15日</div>
         </div>
       
       
@@ -377,9 +405,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/14/Java%E7%BC%96%E7%A8%8B%E8%B7%AF%E7%BA%BF/" title="Java编程路线">
+                      <a href="/2023/06/15/%E7%BA%A2%E9%BB%91%E6%A0%91%E8%A7%A3%E6%9E%90/" title="红黑树解析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java编程路线</span>
+                        <span class="hidden-mobile">红黑树解析</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -387,8 +415,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/09/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/06/15/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%93%E9%A2%983/" title="二叉树专题3">
+                        <span class="hidden-mobile">二叉树专题3</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
