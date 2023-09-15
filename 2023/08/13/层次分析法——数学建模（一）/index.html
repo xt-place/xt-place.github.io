@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peter Xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="层次分析法 AHP层次分析法过程层次分析法就是将一个决策事件分解为目标层（例如选择旅游地），准则层（影响决策的因素，例如景色、交通、费用等）以及方案层（指的是方案，例如去广州、桂林等地旅游）。  建立步骤：   层次结构模型的构建。  构造判断矩阵  层次单排序及其一致性检验  层次总排序及其一致性检验  PS: 一致性检验的含义用于确定构建的判断矩阵是否存在逻辑问题。 1.层次结构模型的构建。确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="层次分析法——数学建模（一）">
+<meta property="og:url" content="http://example.com/2023/08/13/%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95%E2%80%94%E2%80%94%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="XT-CODE-WORLD">
+<meta property="og:description" content="层次分析法 AHP层次分析法过程层次分析法就是将一个决策事件分解为目标层（例如选择旅游地），准则层（影响决策的因素，例如景色、交通、费用等）以及方案层（指的是方案，例如去广州、桂林等地旅游）。  建立步骤：   层次结构模型的构建。  构造判断矩阵  层次单排序及其一致性检验  层次总排序及其一致性检验  PS: 一致性检验的含义用于确定构建的判断矩阵是否存在逻辑问题。 1.层次结构模型的构建。确">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/fb4a24c19b1bb68aab3ccea101551815.png">
+<meta property="og:image" content="http://example.com/images/30dd8e4cdafed2d56d337794fa610dcb.png">
+<meta property="og:image" content="http://example.com/images/6e02b047d20c941c29e57c4a356f7571.png">
+<meta property="og:image" content="http://example.com/images/d476b972c13221d3e1223b1fd5d6782b.png">
+<meta property="og:image" content="http://example.com/images/ea5d74f7b48afd3f446c78866c212d09.png">
+<meta property="og:image" content="http://example.com/images/25047e173e25a3d231b007b305247000.png">
+<meta property="og:image" content="http://example.com/2023/08/13/images/f92cd151513ab425201d920e35c56b98.png">
+<meta property="og:image" content="http://example.com/images/f8b7627588f5b4c005b46c91ddcc5762.png">
+<meta property="og:image" content="http://example.com/images/8f9edf32bb6445d16b6c8009929d4868.png">
+<meta property="og:image" content="http://example.com/images/ea5f4db7cb5744c1fc697ee8ca95c4f2.png">
+<meta property="article:published_time" content="2023-08-13T07:48:23.000Z">
+<meta property="article:modified_time" content="2023-08-13T08:17:51.432Z">
+<meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="数学建模">
+<meta property="article:tag" content="层次分析法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/fb4a24c19b1bb68aab3ccea101551815.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>层次分析法——数学建模（一） - XT-CODE-WORLD</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XT的代码空间</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://w.wallhaven.cc/full/wq/wallhaven-wq8ylp.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="层次分析法——数学建模（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-13 15:48" pubdate>
+          2023年8月13日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          703 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">层次分析法——数学建模（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="层次分析法"><a href="#层次分析法" class="headerlink" title="层次分析法"></a>层次分析法</h1><p><img src="/../images/fb4a24c19b1bb68aab3ccea101551815.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="AHP层次分析法过程"><a href="#AHP层次分析法过程" class="headerlink" title="AHP层次分析法过程"></a>AHP层次分析法过程</h2><p>层次分析法就是将一个决策事件分解为<em>目标层</em>（例如选择旅游地），<em>准则层</em>（影响决策的因素，例如景色、交通、费用等）以及<em>方案层</em>（指的是方案，例如去广州、桂林等地旅游）。</p>
+<p><img src="/../images/30dd8e4cdafed2d56d337794fa610dcb.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>建立步骤：</strong></p>
+<ol>
+<li> 层次结构模型的构建。</li>
+<li> 构造判断矩阵</li>
+<li> 层次单排序及其一致性检验</li>
+<li> <em>层次总排序</em>及其一致性检验</li>
+</ol>
+<p><strong>PS:</strong></p>
+<p>一致性检验的含义用于确定构建的判断矩阵是否存在逻辑问题。</p>
+<h3 id="1-层次结构模型的构建。"><a href="#1-层次结构模型的构建。" class="headerlink" title="1.层次结构模型的构建。"></a>1.层次结构模型的构建。</h3><p>确认整个决策事件的<em>目标层、准则层、方案层</em></p>
+<p><img src="/../images/6e02b047d20c941c29e57c4a356f7571.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>目标层：最优旅游地选择</p>
+<p>准则层：景色、费用、居住、饮食、旅途</p>
+<p>方案层：西安、云南、西藏、青海</p>
+<p>如果有多层：</p>
+<p><img src="/../images/d476b972c13221d3e1223b1fd5d6782b.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="2-构造判断矩阵"><a href="#2-构造判断矩阵" class="headerlink" title="2.构造判断矩阵"></a>2.构造判断矩阵</h3><p>通过各要素之间相互两两比较，并确定各准则层对目标层的权重。</p>
+<p><img src="/../images/ea5d74f7b48afd3f446c78866c212d09.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>建立一个矩阵：</p>
+<p><img src="/../images/25047e173e25a3d231b007b305247000.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A中元素满足：</p>
+<img src="../images/f92cd151513ab425201d920e35c56b98.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 50%;" />
+
+<h3 id="3-层次单排序与一致性检验"><a href="#3-层次单排序与一致性检验" class="headerlink" title="3.层次单排序与一致性检验"></a>3.层次单排序与一致性检验</h3><ul>
+<li>  <strong>step1：层次单排序</strong></li>
+</ul>
+<p>指针对上一层某元素将本层中所有元素两两评比，并开展层次排序， 进行重要顺序的排列。</p>
+<p>具体计算可依据判断矩阵 A 进行，计算中确保其能够符合 <strong>AW=𝜆𝑚𝑎𝑥𝑊</strong>的特征根和特征向量条件。在此，A 的最大特征根为<strong>λmax</strong>，对应λmax的正规化的特征向量为 <strong>W</strong>，𝑤𝑖为 W 的分量，其指的是权值，与其相应元素单排序对应。 利用判断矩阵计算各因素𝑎𝑖𝑗对目标层的权重（权系数）。</p>
+<p><img src="/../images/f8b7627588f5b4c005b46c91ddcc5762.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>  step2：求解最大特征根与CI值</li>
+</ul>
+<p><img src="/../images/8f9edf32bb6445d16b6c8009929d4868.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>C.I.=0 表示判断矩阵完全一致，C.I.越大，判断矩阵的不一致性程度越严重。</p>
+<ul>
+<li>  step3：根据CI、RI值求解CR值，判断其一致性是否通过</li>
+</ul>
+<p> 模拟 1000 次得到的随机一致性指标 R.I.取值表：</p>
+<p><img src="/../images/ea5f4db7cb5744c1fc697ee8ca95c4f2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>当 C.R.&lt;0.1 时，表明判断矩阵 A 的一致性程度被认为在容许的范围内，此时可 用 A 的特征向量开展权向量计算；若 C.R.≥0.1, 则应考虑对判断矩阵 A 进行修正。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="category-chain-item">数学建模</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">#数学建模</a>
+      
+        <a href="/tags/%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95/">#层次分析法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>层次分析法——数学建模（一）</div>
+      <div>http://example.com/2023/08/13/层次分析法——数学建模（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Peter Xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/17/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" title="相关性分析方法——数学建模（二）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">相关性分析方法——数学建模（二）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/11/%E7%A7%92%E6%9D%80%E6%A8%A1%E6%8B%9F%E9%A2%98%E2%80%94%E2%80%94PAT%E5%A4%87%E8%80%83%E8%BF%9B%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89/" title="秒杀模拟题——PAT备考进行时（一）">
+                        <span class="hidden-mobile">秒杀模拟题——PAT备考进行时（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
