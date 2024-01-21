@@ -4,6 +4,271 @@
   
   
   <entry>
+    <title>记录24-1-22</title>
+    <link href="/2024/01/21/%E8%AE%B0%E5%BD%9524-1-22/"/>
+    <url>/2024/01/21/%E8%AE%B0%E5%BD%9524-1-22/</url>
+    
+    <content type="html"><![CDATA[<h1 id="24-1-22"><a href="#24-1-22" class="headerlink" title="24-1-22"></a>24-1-22</h1><h2 id="plan"><a href="#plan" class="headerlink" title="plan"></a>plan</h2><ul><li>  [ ] vue文件预览完成（1个小时）</li><li>  [ ] 工越登录界面以及增删改查完成（1个小时）</li><li>  [ ] 伙伴匹配项目3、4完成（4小时）</li><li>  [ ] 微服务框架学习（2小时）</li><li>  [ ] 计算机网络学习（1小时）</li><li>  [ ] 论文（2小时）</li><li>  [ ] Java集合、反射复习</li><li>  [ ] 代码随想录数组部分</li><li>  [ ] 算法笔记图算法</li><li>  [ ] 英语口语听力</li></ul><h2 id="accumulation"><a href="#accumulation" class="headerlink" title="accumulation"></a>accumulation</h2><ul><li></li></ul><h2 id="question"><a href="#question" class="headerlink" title="question"></a>question</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>plan-24</title>
+    <link href="/2024/01/21/plan-24/"/>
+    <url>/2024/01/21/plan-24/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Total"><a href="#Total" class="headerlink" title="Total"></a>Total</h1><p>今年几件大事：</p><p>1、找到Java后端的工作：#双休 #8小时 #总包15w</p><p>2、25考研985计算机11408考到430+（初试第一）</p><p>3、坚持健身，保持作息和饮食</p><p>4、做一个个人大项目，要足够新颖，并且有市场需求的</p><p>5、坚持写作，坚持在知识星球打卡，坚持看书</p><p>6、雅思7.5，CET6（600+）</p><p>7、软考中级，CSP400+，PAT甲级满分</p><h2 id="Plan-Each"><a href="#Plan-Each" class="headerlink" title="Plan-Each"></a>Plan-Each</h2><h3 id="（1）Java后端"><a href="#（1）Java后端" class="headerlink" title="（1）Java后端"></a>（1）Java后端</h3><p>首先说一下现在自身的能力和buff。</p><p>可以说无竞赛（只有一个省三）、无论文、项目正在产出，24考研失利，编码能力下降，计算机基础不好。目前想通过过年这段时间准备春招，投简历时间定为2月中旬-4月，也就是只有一个月的时间，在这一个月里我需要做到像春招简历上面的技术能力，因为时间比较紧所以很多基础不能重新学，只能以面经为主，通过面经去发现自己的不足。</p><p>大概的学习路线：</p><p><strong>基础</strong></p><ul><li>  计算机网络</li><li>  操作系统</li><li>  计算机组成原理</li><li>  设计模式</li></ul><p><strong>Java技术栈</strong></p><ul><li>  Java基础</li><li>  JVM和并发控制</li><li>  Linux+Docker+Nginx+Maven+Git</li><li>  Mysql+Redis</li><li>  SSM+SpringBoot+Mybatis-Plus</li><li>  SpringSecurity</li><li>  微服务框架</li><li>  运维相关</li></ul><p><strong>项目</strong></p><ul><li>  伙伴匹配项目</li><li>  API开放平台</li><li>  OJ判题系统</li><li>  智能促销推荐平台（注重算法调优）</li></ul><h3 id="（2）11408（430-）"><a href="#（2）11408（430-）" class="headerlink" title="（2）11408（430+）"></a>（2）11408（430+）</h3><h3 id="（3）大项目"><a href="#（3）大项目" class="headerlink" title="（3）大项目"></a>（3）大项目</h3><h3 id="（4）健身、作息"><a href="#（4）健身、作息" class="headerlink" title="（4）健身、作息"></a>（4）健身、作息</h3><h3 id="（5）写作、打卡、看书"><a href="#（5）写作、打卡、看书" class="headerlink" title="（5）写作、打卡、看书"></a>（5）写作、打卡、看书</h3><hr><h2 id="January"><a href="#January" class="headerlink" title="January"></a>January</h2><h3 id="plan"><a href="#plan" class="headerlink" title="plan"></a>plan</h3><p><strong>基础</strong></p><ul><li>  [ ] 计算机网络（22-28）</li><li>  [ ] 操作系统（一个小项目）（29-04）</li></ul><p><strong>Java技术栈</strong></p><ul><li>  [ ] 微服务框架（22-24）</li><li>  [ ] Java基础（空闲时间看）</li><li>  [ ] JVM和并发控制（25-28）</li></ul><p><strong>项目</strong></p><ul><li>  [ ] 伙伴匹配项目完成（要有自己的）</li><li>  [ ] 微服务项目（随便找）</li></ul><p><strong>论文</strong></p><ul><li>  [ ] 做好代码编写，方法确定</li><li>  [ ] 机器学习学习</li></ul><p><strong>书籍</strong></p><ul><li>  [ ] 《计算机网络自顶向下》</li><li>  [ ] 《图解TCPIP》</li></ul><p><strong>比赛</strong></p><ul><li>  [ ] 《算法笔记》刷一遍（从不会的开始刷）</li><li>  [ ] 代码随想录（数组、链表、哈希表、字符串、双指针）</li></ul><p><strong>英语</strong></p><ul><li>  [ ] 口语加听力</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>plan</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>plan</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记录24-1-20-21</title>
+    <link href="/2024/01/19/%E8%AE%B0%E5%BD%9524-1-20-21/"/>
+    <url>/2024/01/19/%E8%AE%B0%E5%BD%9524-1-20-21/</url>
+    
+    <content type="html"><![CDATA[<h1 id="24-1-20-21（周末）"><a href="#24-1-20-21（周末）" class="headerlink" title="24-1-20-21（周末）"></a>24-1-20-21（周末）</h1><h2 id="plan"><a href="#plan" class="headerlink" title="plan"></a>plan</h2><ul><li>  [ ] 伙伴匹配项目完成</li><li>  [ ] 微服务框架完成</li><li>  [ ] 工越vue完成</li><li>  [ ] 工越王老师作业完成</li><li>  [ ] 下周计划</li></ul><h2 id="accumulation"><a href="#accumulation" class="headerlink" title="accumulation"></a>accumulation</h2><h2 id="question"><a href="#question" class="headerlink" title="question"></a>question</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Vue3实现移动端的pdf、docx、xlsx、ppt的预览</title>
+    <link href="/2024/01/19/Vue3%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%9A%84pdf%E3%80%81docx%E3%80%81xlsx%E3%80%81ppt%E7%9A%84%E9%A2%84%E8%A7%88/"/>
+    <url>/2024/01/19/Vue3%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%9A%84pdf%E3%80%81docx%E3%80%81xlsx%E3%80%81ppt%E7%9A%84%E9%A2%84%E8%A7%88/</url>
+    
+    <content type="html"><![CDATA[<h2 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h2><p>利用pdfh5实现，原链接<a href="https://gitee.com/gjTool/pdfh5">https://gitee.com/gjTool/pdfh5</a></p><p>(1)添加依赖</p><p><img src="/../images/image-20240119104238387.png" alt="image-20240119104238387"></p><p>(2)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div id=&quot;app&quot;&gt;<br>      &lt;div id=&quot;pdfdemo&quot;&gt;&lt;/div&gt;<br>    &lt;/div&gt;<br>  &lt;/template&gt;<br>  &lt;script&gt;<br>    import Pdfh5 from &quot;pdfh5&quot;;<br>    export default &#123;<br>      name: &#x27;FjPdf&#x27;,<br>      data() &#123;<br>        return &#123;<br>          pdfh5: null<br>        &#125;;<br>      &#125;,<br>      mounted() &#123;<br>          //实例化<br>        this.pdfh5 = new Pdfh5(&quot;#pdfdemo&quot;, &#123;<br>          pdfurl: &quot;http://115.231.196.26:8001/ZC_LGKY/UploadFiles/2024-01/DM8 Install_202411617610408.pdf&quot;,<br>        &#125;);<br>        //监听完成事件<br>        this.pdfh5.on(&quot;complete&quot;, function (status, msg, time) &#123;<br>          console.log(&quot;状态：&quot; + status + &quot;，信息：&quot; + msg + &quot;，耗时：&quot; + time + &quot;毫秒，总页数：&quot; + this.totalNum)<br>          //禁止手势缩放<br>          this.pdfh5.zoomEnable(false);<br>        &#125;)<br>      &#125;<br>    &#125;<br>  &lt;/script&gt;<br>  <br>  &lt;style&gt;<br>      @import &quot;pdfh5/css/pdfh5.css&quot;;<br>      *&#123;<br>      padding: 0;<br>      margin: 0;<br>      &#125;<br>      html,body,#app &#123;<br>      width: 100%;<br>      height: 100%;<br>      &#125;<br>  &lt;/style&gt;<br></code></pre></td></tr></table></figure><h2 id="word"><a href="#word" class="headerlink" title="word"></a>word</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+      <category>vue</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记录24-1-19</title>
+    <link href="/2024/01/19/%E8%AE%B0%E5%BD%9524-1-19/"/>
+    <url>/2024/01/19/%E8%AE%B0%E5%BD%9524-1-19/</url>
+    
+    <content type="html"><![CDATA[<h1 id="24-1-19"><a href="#24-1-19" class="headerlink" title="24-1-19"></a>24-1-19</h1><h2 id="plan"><a href="#plan" class="headerlink" title="plan"></a>plan</h2><ul><li>  [x] 微服务Day5</li><li>  [ ] 工越问题解决（30min）×</li><li>  [ ] 伙伴匹配项目前端完成（1小时听课，2小时实操）</li><li>  [ ] </li></ul><h2 id="accumlation"><a href="#accumlation" class="headerlink" title="accumlation"></a>accumlation</h2><ul><li><pre><code class="hljs">  docker run -p 8848:8848 -e MODE=standalone --name nacos -d nacos/nacos-server//在启动nacos的时候要指定运行模式，否则将访问不了.</code></pre></li><li><p>  解决加密视频无法复制的问题：<strong>cmd.exe /c “echo off | clip</strong></p></li><li></li></ul><h2 id="question"><a href="#question" class="headerlink" title="question"></a>question</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>春招简历</title>
+    <link href="/2024/01/18/%E6%98%A5%E6%8B%9B%E7%AE%80%E5%8E%86/"/>
+    <url>/2024/01/18/%E6%98%A5%E6%8B%9B%E7%AE%80%E5%8E%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h1><p>目标是中厂，人数小于20不考虑，总包在15W+。</p><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul><li>  [ ] 计算机网络（面经）</li><li>  [ ] 操作系统（做一个小型的操作系统）</li><li>  [ ] 计算机组成原理（408）</li><li>  [ ] 数据结构（leetcode先和代码随想录敲一遍，争取每题都要有深度理解）</li></ul><h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><ul><li>  [ ] Java基础（把之前总结的笔记看完，然后把Java的知识点补齐）</li><li>  [ ] JVM和并发控制（每天晚上花1小时学习）</li><li>  [ ] HTML+CSS+Javascript+Ajax+Jquery+VUE（主要是熟练一下VUE可以自己DIY）(Vue需要多练习)</li><li>  [ ] Linux+Docker+Nginx+Maven+Git（在实战中积累，找工作之前突击）</li><li>  [ ] Mysql+Oracle+Redis（Oracle不要求，其他需要熟练）</li><li>  [ ] SSM+SpringBoot+Mybatis-Plus（重中之重）</li><li>  [ ] SpringSecurity（亮点）</li><li>  [ ] Netty+Dubbo+SpringCloud+ElasticSearch+RabbitMQ+KafKa+Zookeeper（微服务）</li><li>  [ ] K8s</li></ul><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ul><li>  [ ] 伙伴匹配项目</li><li>  [ ] API开放平台</li><li>  [ ] OJ判题系统</li><li>  [x] 智能促销推荐平台（需要魔改）</li><li>  [ ] 。。</li></ul><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul><li>  [ ] CET6</li><li>  [ ] 数学建模省三</li><li>  [ ] CSP400+</li><li>  [ ] PAT甲级满分</li></ul><h1 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h1><p>目前已经是1月中旬了，一些企业的春招已经快开始了，目前打算每天花10h+用于冲刺offer，时间确实不太够，打算过年前就是要把这个简历完善好，然后过完年就投一下杭州或者广州的后端工程师岗位，实习期间需要做一个项目，当然还有毕业论文，那个是机器学习方向的，每天抽2个小时来写就可以了。关于技术的学习我认为现在最需要的就是性价比和速度，对于一些bug我觉得没有必要太执着，那些听过的课有个影响就可以了，把时间都放在开发项目上。现在每天需要做的事情有以下：</p><ul><li>  学习技术方向的理论——上午</li><li>  做项目——下午</li><li>  健身半小时到1小时（中午控制饮食）——下班后</li><li>  学习基础方向的知识、毕业设计——晚上</li><li>  学英语，口语（找点素材跟着读）、单词（不背单词专业八级单词）、阅读（公众号）、听力（2天精听一篇）【1雄小时】——晚上睡前</li></ul><h1 id="作息"><a href="#作息" class="headerlink" title="作息"></a>作息</h1><p>早上7点起，晚上1点前睡，保证6小时。（番茄钟严格⏲）</p><h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>大不了送外卖，反正我觉得我可以脱下孔乙己的长衫，过渡一年，考研。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>春招</tag>
+      
+      <tag>简历</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记录24-1-18</title>
+    <link href="/2024/01/18/%E8%AE%B0%E5%BD%9524-1-18/"/>
+    <url>/2024/01/18/%E8%AE%B0%E5%BD%9524-1-18/</url>
+    
+    <content type="html"><![CDATA[<h1 id="24-1-18"><a href="#24-1-18" class="headerlink" title="24-1-18"></a>24-1-18</h1><h2 id="todo-list"><a href="#todo-list" class="headerlink" title="todo-list"></a>todo-list</h2><ul><li>  [x] Vue的bug修改好（1小时）(差点意思doc可以改进一下)</li><li>  [x] 微服务Day4-5（3小时）(完成了Day4，因为做了Day3的作业)</li><li>  [ ] 伙伴匹配项目后端完成（3小时）</li><li>  [ ] 代码随想录数组和链表（2小时）</li><li>  [ ] 论文选择方向和方法（3小时）</li><li>  [ ] Java基础复习，结合面经加上刷牛客的题目（2小时）</li></ul><h2 id="accumulation"><a href="#accumulation" class="headerlink" title="accumulation"></a>accumulation</h2><ul><li><p>```<br>  @Service<br>  @RequiredArgsConstructor<br>  public class OrderServiceImpl extends ServiceImpl&lt;OrderMapper, Order&gt; implements IOrderService {</p><pre><code class="hljs">  private final IItemService itemService;  private final IOrderDetailService detailService;  private final ICartService cartService;</code></pre>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-code">    上面的这个例子是说如果要提供参数为itemService的构造函数，那么我们可以在类前加上@RequiredArgsConstructor，然后声明final</span><br><span class="hljs-code"></span><br><span class="hljs-bullet">-</span>   ![<span class="hljs-string">image-20240118085225946</span>](<span class="hljs-link">../images/image-20240118085225946.png</span>)<br><br><span class="hljs-code">    上面的模型演示了cart和item作为两个单一模块怎么进行访问，也就是cart如果要用到item模块中的接口数据，可以通过api中心的client进行通讯，@FeignClient(value = &quot;item-service&quot;,configuration = DefaultFeignConfig.class)声明在Client中，但是我们思考一个问题那就是在利用client进行传输的时候，我们需要注意到的就是我们访问的都是controller层，而不是service层</span><br><span class="hljs-code"></span><br><span class="hljs-bullet">-</span>   OpenFeign 是一个基于注解的声明性 HTTP 客户端，它集成了 Ribbon 负载均衡器。Ribbon 是 Netflix 开源的负载均衡器，用于在微服务架构中进行服务实例的负载均衡。<br><br><span class="hljs-bullet">-</span>   工越笔记：<br><br><span class="hljs-bullet">    -</span>   安装<br><br><span class="hljs-bullet">    -</span>   <span class="hljs-code">```</span><br><span class="hljs-code">        cnpm install </span><br></code></pre></td></tr></table></figure><ul><li></li></ul></li></ul><h2 id="question"><a href="#question" class="headerlink" title="question"></a>question</h2><ul><li>  事务管理机制 和应用场景</li><li>  跨域怎么传递的，微服务是怎么定位对方的接口的，微服务之间的数据传输就是访问接口吗，不可以访问对方的实体类吗</li></ul><h2 id="review"><a href="#review" class="headerlink" title="review"></a>review</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>未来一年的打算（2024年）</title>
+    <link href="/2024/01/17/%E6%9C%AA%E6%9D%A5%E4%B8%80%E5%B9%B4%E7%9A%84%E6%89%93%E7%AE%97%EF%BC%882024%E5%B9%B4%EF%BC%89/"/>
+    <url>/2024/01/17/%E6%9C%AA%E6%9D%A5%E4%B8%80%E5%B9%B4%E7%9A%84%E6%89%93%E7%AE%97%EF%BC%882024%E5%B9%B4%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><p>我想通过2023年的磨练，在2024这一年中我一定会有非常巨大的变化，并且可能是有史以来的最明显的一次蜕变。那么在2024年有几件大事：</p><ul><li>  找到总包20w的工作</li><li>  985计算机类研究生初试400+</li><li>  开创一个副业（钱多少不是问题，就算亏了也没关系，重要的是养成经商的思路）</li><li>  雅思7.5、CET600+</li><li>  坚持在知识星球打卡</li><li>  坚持健身</li><li>  坚持看书（戒掉手机或者电子娱乐）</li></ul><h2 id="1月-2月（春招准备期-实验期）"><a href="#1月-2月（春招准备期-实验期）" class="headerlink" title="1月-2月（春招准备期+实验期）"></a>1月-2月（春招准备期+实验期）</h2><h3 id="春招！！！（所说的实验也就是把自己处于超高压下，迸发出无限潜力）"><a href="#春招！！！（所说的实验也就是把自己处于超高压下，迸发出无限潜力）" class="headerlink" title="春招！！！（所说的实验也就是把自己处于超高压下，迸发出无限潜力）"></a>春招！！！（所说的实验也就是把自己处于超高压下，迸发出无限潜力）</h3><p>1月份到2月中旬的主要任务，年后就要开始投简历。</p><p>把握好这一个月</p><p>基础篇（每天晚上）</p><p>项目（下午）</p><ul><li>  伙伴匹配项目</li><li>  OJ项目</li><li>  工越项目</li><li>  。。。</li></ul><p>框架篇（上午）</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>年度计划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>伙伴匹配项目笔记</title>
+    <link href="/2024/01/16/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/"/>
+    <url>/2024/01/16/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="伙伴匹配项目"><a href="#伙伴匹配项目" class="headerlink" title="伙伴匹配项目"></a>伙伴匹配项目</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><h3 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h3><p><img src="/../images/image-20240116154311741.png" alt="image-20240116154311741"></p><p>###（2）</p><h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vue</tag>
+      
+      <tag>项目</tag>
+      
+      <tag>springboot</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记录</title>
+    <link href="/2024/01/15/%E8%AE%B0%E5%BD%95/"/>
+    <url>/2024/01/15/%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="24-1-16"><a href="#24-1-16" class="headerlink" title="24-1-16"></a>24-1-16</h1><ul><li><p>  stream，lambda</p></li><li><p>  字符串转json，反序列化和序列化</p></li><li><p>  gson</p></li><li><p>```java<br>  StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, planetCode)</p>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-code">    用于判断传输过来的参数是否有缺失。</span><br><span class="hljs-code"></span><br><span class="hljs-bullet">-</span>   telnet ip port用于测试端口连接<br><br><span class="hljs-bullet">-</span>   netstat -ano | find &quot;8080&quot;//查询端口<br><br><span class="hljs-bullet">-</span>   taskkill /F /PID <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">PID</span>&gt;</span></span> //杀端口<br><br><span class="hljs-section"># 24-1-17</span><br><br><span class="hljs-bullet">-</span>   通过tag来查找用户：情况如下：and或者or，都符合tag还是只有一个符合就可以了<br><br><span class="hljs-bullet">-</span>   <span class="hljs-strong">**`new TypeToken<span class="language-xml">&lt;Set<span class="hljs-tag">&lt;<span class="hljs-name">String</span>&gt;</span></span>&gt;() &#123;&#125;.getType()`**</span>这是gson处理泛型的技巧。<br><br><span class="hljs-bullet">-</span>   <span class="hljs-code">```</span><br><span class="hljs-code">    tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet&lt;&gt;());</span><br><span class="hljs-code">    </span><br></code></pre></td></tr></table></figure><ol><li> <strong><code>Optional.ofNullable(tempTagNameSet)</code>：</strong> 将 <code>tempTagNameSet</code> 包装为一个 <code>Optional</code> 对象。这意味着，如果 <code>tempTagNameSet</code> 不为 null，将其包装在 <code>Optional</code> 中；如果为 null，<code>Optional</code> 中将包装一个空值（<code>null</code>）。</li><li><strong><code>.orElse(new HashSet&lt;&gt;())</code>：</strong> 如果 <code>Optional</code> 包含一个非空值，那么返回该值；否则，返回提供的默认值，即 <code>new HashSet&lt;&gt;()</code>。<ul><li>  如果 <code>tempTagNameSet</code> 不为 null，<code>orElse</code> 将返回原始的 <code>tempTagNameSet</code>。</li><li>  如果 <code>tempTagNameSet</code> 为 null，<code>orElse</code> 将返回一个新的空的 <code>HashSet&lt;&gt;</code>。</li></ul></li></ol><p>  这种用法可以防止 <code>tempTagNameSet</code> 为 null 时引发空指针异常，并提供一个默认值，以确保后续代码能够正常运行。</p></li><li><p><img src="/../images/image-20240117161029126.png" alt="image-20240117161029126"></p><p>  说明：上面的代码用来stream来处理，stream().fliter(user-&gt;{如果是true则保留，如果是false则删除})</p></li><li><p>  java8 parallelStream的陷阱</p></li><li></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>编程记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>编程记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>SpringCloud(一)——初识微服务</title>
+    <link href="/2024/01/15/SpringCloud-%E4%B8%80-%E2%80%94%E2%80%94%E5%88%9D%E8%AF%86%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    <url>/2024/01/15/SpringCloud-%E4%B8%80-%E2%80%94%E2%80%94%E5%88%9D%E8%AF%86%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>垂死挣扎——PAT备考进行时（八）</title>
     <link href="/2023/09/13/%E5%9E%82%E6%AD%BB%E6%8C%A3%E6%89%8E%E2%80%94%E2%80%94PAT%E5%A4%87%E8%80%83%E8%BF%9B%E8%A1%8C%E6%97%B6%EF%BC%88%E5%85%AB%EF%BC%89/"/>
     <url>/2023/09/13/%E5%9E%82%E6%AD%BB%E6%8C%A3%E6%89%8E%E2%80%94%E2%80%94PAT%E5%A4%87%E8%80%83%E8%BF%9B%E8%A1%8C%E6%97%B6%EF%BC%88%E5%85%AB%EF%BC%89/</url>
