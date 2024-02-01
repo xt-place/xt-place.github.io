@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peter Xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统的启动引入：在下面这块开机启动界面的背后发生了什么，倒是我们可以在这块冰冷的屏幕上面显示精彩的内容，操作系统在里面起到什么样的角色，又是任何从机器中读取代码和解释代码的呢？  计算机上电   刚开机，内存中没有任何的程序，只有BIOS可以执行。X86PC处于实模式（和保护模式相对，实模式的寻址CS:IP，和保护模式不同），寻址方式和我们学过的8086一样，寻址范围为20位也就是1M。开机时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统是怎么启动的">
+<meta property="og:url" content="http://example.com/2024/02/01/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%90%AF%E5%8A%A8%E7%9A%84/index.html">
+<meta property="og:site_name" content="XT-CODE-WORLD">
+<meta property="og:description" content="操作系统的启动引入：在下面这块开机启动界面的背后发生了什么，倒是我们可以在这块冰冷的屏幕上面显示精彩的内容，操作系统在里面起到什么样的角色，又是任何从机器中读取代码和解释代码的呢？  计算机上电   刚开机，内存中没有任何的程序，只有BIOS可以执行。X86PC处于实模式（和保护模式相对，实模式的寻址CS:IP，和保护模式不同），寻址方式和我们学过的8086一样，寻址范围为20位也就是1M。开机时">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20230414135655373.png">
+<meta property="og:image" content="http://example.com/images/image-20230414103136676.png">
+<meta property="og:image" content="http://example.com/images/image-20230414103359727.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17731575-630c494ee7d7cf66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/766/format/webp">
+<meta property="og:image" content="http://example.com/images/image-20230414144150917.png">
+<meta property="og:image" content="http://example.com/images/image-20230414144613600.png">
+<meta property="article:published_time" content="2024-02-01T00:52:41.000Z">
+<meta property="article:modified_time" content="2024-02-01T00:58:12.104Z">
+<meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20230414135655373.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>操作系统是怎么启动的 - XT-CODE-WORLD</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XT的代码空间</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://w.wallhaven.cc/full/wq/wallhaven-wq8ylp.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="操作系统是怎么启动的"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-01 08:52" pubdate>
+          2024年2月1日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">操作系统是怎么启动的</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="操作系统的启动"><a href="#操作系统的启动" class="headerlink" title="操作系统的启动"></a>操作系统的启动</h1><p>引入：在下面这块开机启动界面的背后发生了什么，倒是我们可以在这块冰冷的屏幕上面显示精彩的内容，操作系统在里面起到什么样的角色，又是任何从机器中读取代码和解释代码的呢？</p>
+<p><img src="/../images/image-20230414135655373.png" srcset="/img/loading.gif" lazyload alt="image-20230414135655373"></p>
+<h2 id="计算机上电"><a href="#计算机上电" class="headerlink" title="计算机上电"></a>计算机上电</h2><ul>
+<li>  刚开机，内存中没有任何的程序，只有BIOS可以执行。X86PC处于实模式（和保护模式相对，实模式的寻址CS:IP，和保护模式不同），寻址方式和我们学过的8086一样，寻址范围为20位也就是1M。开机时 <code>CS = 0xFFFF； IP = 0x0000</code>，那么就是寻址<code>0xFFFF0</code>地址，而这个地址存储的就是ROM BIOS映射区（计算机初始化过程中会把BIOS代码复制到ROMBIOS映射区）。</li>
+</ul>
+<p>以上内容就是在将CPU首先从ROＭ BIOS映射区开始执行。那么BIOS是用来干嘛的呢</p>
+<ul>
+<li>  该程序主要负责检测系统硬件是否正常，并建立中断向量表（这只是供操作系统使用，操作系统初始化以后就会覆盖，并且建立新的中断向量表）。</li>
+<li>  在ROM BIOS映射区的代码执行到最后，就会将操作系统启动程序（bootsect.s）从0磁盘0扇区复制到内存<code>0X07C00</code>处，并且设置CS=<code>0X07C0</code>,IP=<code>0x0000</code></li>
+<li>  最后cpu转移到bootsect.s开始执行。</li>
+</ul>
+<p><img src="/../images/image-20230414103136676.png" srcset="/img/loading.gif" lazyload alt="image-20230414103136676"></p>
+<p>操作系统程序在磁盘中的分布情况：</p>
+<p><img src="/../images/image-20230414103359727.png" srcset="/img/loading.gif" lazyload alt="image-20230414103359727"></p>
+<h2 id="引导扇区代码-bootsect-s（实模式下运行的16位汇编代码程序，8086汇编语言）"><a href="#引导扇区代码-bootsect-s（实模式下运行的16位汇编代码程序，8086汇编语言）" class="headerlink" title="引导扇区代码:bootsect.s（实模式下运行的16位汇编代码程序，8086汇编语言）"></a>引导扇区代码:bootsect.s（实模式下运行的16位汇编代码程序，8086汇编语言）</h2><p>bootsect.s是操作系统的引导程序，是操作系统执行的第一个程序，bootsect.s工作如下：</p>
+<p>1、将自己的程序搬运到0x9000开始的位置（为后续的system的挪用腾出位置），也就是将0x07c0:0x0000处的256个字全部移动到0x9000，然后跳转到0x90000+go处执行程序，bootsect.s的大小不会超过一个扇区，磁盘的0扇区只存bootsect.s。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">_start:   ！第46行<br>	mov	ax,#BOOTSEG<br>	mov	ds,ax<br>	mov	ax,#INITSEG<br>	mov	es,ax<br>	mov	cx,#256<br>	sub	si,si<br>	sub	di,di<br>	rep   <br>	movw    ！将自己搬到0X90000处<br>	jmpi	go,INITSEG    ！跳转至0X90000+go 处执行程序<br>	go:	mov	ax,cs<br></code></pre></td></tr></table></figure>
+
+<p>注：jmpi     ip，cs</p>
+<p>2、将setup从磁盘第2块扇区开始到第4块扇区加载到内存0x90200位置处，也就是紧接着bootsect。然后利用BIOS中断(int 0x13) 取磁盘参数表中当前启动引导盘的参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs assembly">load_setup:     ！第67行<br>	mov	dx,#0x0000		! drive 0, head 0<br>	mov	cx,#0x0002		! sector 2, track 0<br>	mov	bx,#0x0200		! address = 512, in INITSEG<br>	mov	ax,#0x0200+SETUPLEN	! service 2, nr of sectors<br>	int	0x13			! read it<br>	jnc	ok_load_setup		! ok - continue<br></code></pre></td></tr></table></figure>
+
+<p>注：0x13是BIOS读磁盘扇区的中断。</p>
+<p>3、接着在屏幕上显示”Loading system“</p>
+<p>4、读入setup模块以后：ok_load_setup</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">Ok_load_setup: //载入setup模块<br>    mov dl,#0x00 mov ax,#0x0800 //ah=8获得磁盘参数<br>    int 0x13 mov ch,#0x00 mov sectors,cx<br>    mov ah,#0x03 xor bh,bh int 0x10 //读光标<br>    mov cx,#24 mov bx,#0x0007<br>    mov bp,#msg1 mov ax,#1301 int 0x10 //显示字符<br>    mov ax,#SYSSEG //SYSSEG=0x1000 <br>    mov es,ax <br>    call read_it //读入system模块<br>    jmpi 0,SETUPSEG<br></code></pre></td></tr></table></figure>
+
+<p>5、读入system模块</p>
+<p>将 system 模块的代码从磁盘搬到内存0x10000开始的位置。SYSSIZE = 0x3000 is 0x30000 bytes = 196kB 。Linux0.11中默认内核大小不会超过196KB。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov	ax,#SYSSEG   ！第107行<br>mov	es,ax		! segment of 0x010000<br>call	read_it<br>...<br>read_it:<br>...<br>read_track:<br>...<br>mov dx,head  ！head.s是system模块的第一个程序<br>mov dh,dl<br>mov dl,#0<br>and dx,#0x0100<br>mov ah,#2<br>int 0x13   !这才是正式开始搬运system模块。<br>...<br></code></pre></td></tr></table></figure>
+
+<p>因为system模块可能很大，要跨越磁道，所以需要定义一个函数。</p>
+<p>6、确定根文件系统的设备号。</p>
+<p>7、跳转至setup执行，移交控制权</p>
+<p><strong>bootsect.s的工作总结:bootsect.s主要就是加载setup和读system</strong></p>
+<h2 id="操作系统的启动setup-s（实模式下运行的-16-位汇编代码程序，8086-汇编语言）"><a href="#操作系统的启动setup-s（实模式下运行的-16-位汇编代码程序，8086-汇编语言）" class="headerlink" title="操作系统的启动setup.s（实模式下运行的 16 位汇编代码程序，8086 汇编语言）"></a>操作系统的启动setup.s（实模式下运行的 16 位汇编代码程序，8086 汇编语言）</h2><p>setup是一个操作系统加载程序，就是完成OS启动前的设置，setup的工作如下：</p>
+<p>1、利用BIOS的中断获取计算机参数（内存大小，磁盘参数、显示器参数等），并将参数存入0X90000开始的位置（将bootsect.s覆盖掉）。获取的参数如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/17731575-630c494ee7d7cf66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/766/format/webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>2、将system模块从 0x10000 - 0x8ffff (当时认为内核系统模块 system 的长度不会超过此值 512KB) 整块向下移动到内存绝对地址 0x00000 处。这意味着原来的 BIOS 中断向量表被覆盖了（问题：中断向量表是用来干什么的）。</p>
+<p>3、接下来加载中断描述符表寄存器（idtr）和全局描述符寄存器（gdtr），建立idt和gdt，但是这只是个临时表，之后会重新设置gdt和idt，这里是为了方便cpu进入保护模式时能正确寻址（这里主要是为了保证能跳到system模块执行）。设置8259芯片，重新设置中断向量表。</p>
+<p>4、设置CPU控制寄存器CR0（称为机器状态字），CPU进入32位保护模式，程序跳转到物理内存起始位置开始执行。保护模式下和实模式下的int n和cs:ip解释不同。</p>
+<p>5、最后跳转到位于system模块最前面的head.s程序继续执行。</p>
+<p><strong>补充1：cr0寄存器</strong></p>
+<ul>
+<li>  PE端=0 为实模式</li>
+<li>  PE端=1 为保护模式</li>
+<li>  PG端=1 启动分页</li>
+</ul>
+<p><strong>补充2：32位的寻址方式</strong></p>
+<p>因为20位地址只能够寻址1M的寻址范围，所以需要32位寻址范围为4G。</p>
+<ul>
+<li>  CS成为选择子：放置查表索引</li>
+<li>  根据表项产生地址</li>
+<li>  <strong>setup需初始化GDT表</strong></li>
+<li>  使用GDT表项，将jmp 0,8（setup.s末句）寻址为0地址</li>
+</ul>
+<p><strong>补充3：中断处理IDT</strong>(待补充)</p>
+<h2 id="执行head-s（运行在保护模式下的-32-位汇编代码程序，AT-amp-T-语法的汇编语言程序）"><a href="#执行head-s（运行在保护模式下的-32-位汇编代码程序，AT-amp-T-语法的汇编语言程序）" class="headerlink" title="执行head.s（运行在保护模式下的 32 位汇编代码程序，AT&amp;T 语法的汇编语言程序）"></a>执行head.s（运行在保护模式下的 32 位汇编代码程序，AT&amp;T 语法的汇编语言程序）</h2><p>它将进一步进行操作系统的初始化，head.s 程序在被编译生成目标文件后会与内核其他程序一起被链接成 system 模块，位于 system 模块的最前面开始部分。从这里开始内核就完全在保护模式下运行了，该程序位于内存绝对地址为0处开始。</p>
+<p>工作内容：</p>
+<p>1、首先加载各个数据段寄存器，重新设置IDT</p>
+<p>2、重新设置GDT</p>
+<p>3、检查A20地址线是否打开</p>
+<p>4、设置管理内存的分页处理机制，将页目录表放在绝对物理地址0开始处。</p>
+<p>5、最后heads程序返回指令将预先放置在堆栈中的main.c程序入口弹出，运行main()。</p>
+<p><strong>补充1：</strong></p>
+<p>heads怎么跳到main函数的？从汇编语言跳到c语言要经过怎么样的操作？</p>
+<p>答：首先先将参数、返回值、main压入栈，然后通过ret一个一个出栈，如下图所示：</p>
+<p><img src="/../images/image-20230414144150917.png" srcset="/img/loading.gif" lazyload alt="image-20230414144150917"></p>
+<p>main是一个永远都不会退出的程序，因为退出就会造成死机。</p>
+<p><strong>补充2</strong>：</p>
+<p>mem_init初始化过程</p>
+<p><img src="/../images/image-20230414144613600.png" srcset="/img/loading.gif" lazyload alt="image-20230414144613600"></p>
+<p>以上的代码就是初始化了一个称为mem_map的表结构，有些表不为空就说明是存放操作系统的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>操作系统启动加载的过程简单来说就是：以加载mem_init()为例子：bootsect.s-&gt;setup.s-&gt;head.s-&gt;main()-&gt;mem_init()</p>
+<h1 id="实验一：操作系统的引导"><a href="#实验一：操作系统的引导" class="headerlink" title="实验一：操作系统的引导"></a>实验一：操作系统的引导</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>操作系统是怎么启动的</div>
+      <div>http://example.com/2024/02/01/操作系统是怎么启动的/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Peter Xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/01/80x86%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/" title="80x86保护模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">80x86保护模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/01/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E6%9C%AC/" title="学习记录本">
+                        <span class="hidden-mobile">学习记录本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

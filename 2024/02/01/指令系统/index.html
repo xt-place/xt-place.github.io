@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peter Xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="指令系统机器指令   什么是机器指令，指令系统又是什么？  人们把机器语言的语句叫做机器指令，把这些指令集合叫做指令系统。 指令的一般格式指令是由操作码和地址码两部分组成的。（都是通过二进制描述） 1、操作码   操作码是用来说明这条指令是用来完成什么样的操作的。   操作长度可以是固定的也可以是变化的。如果是固定的，便于硬件的设计，指令译码时间短，广泛运用于字长较长的计算机，如RISC。   如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指令系统">
+<meta property="og:url" content="http://example.com/2024/02/01/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="XT-CODE-WORLD">
+<meta property="og:description" content="指令系统机器指令   什么是机器指令，指令系统又是什么？  人们把机器语言的语句叫做机器指令，把这些指令集合叫做指令系统。 指令的一般格式指令是由操作码和地址码两部分组成的。（都是通过二进制描述） 1、操作码   操作码是用来说明这条指令是用来完成什么样的操作的。   操作长度可以是固定的也可以是变化的。如果是固定的，便于硬件的设计，指令译码时间短，广泛运用于字长较长的计算机，如RISC。   如">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20230326104921193.png">
+<meta property="og:image" content="http://example.com/images/image-20230326110522933.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326110715358.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326122031552.png">
+<meta property="og:image" content="http://example.com/images/image-20230326121334314.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326121354765.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326122112816.png">
+<meta property="og:image" content="http://example.com/images/image-20230326121516902.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326121530791.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326122142565.png">
+<meta property="og:image" content="http://example.com/images/image-20230326121847103.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326122202153.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326122327067.png">
+<meta property="og:image" content="http://example.com/相册/typora/image-20230326124216225.png">
+<meta property="og:image" content="http://example.com/images/image-20230326125309276.png">
+<meta property="og:image" content="http://example.com/images/image-20230326125508622.png">
+<meta property="og:image" content="http://example.com/images/image-20230326125830548.png">
+<meta property="og:image" content="http://example.com/images/image-20230326182319815.png">
+<meta property="og:image" content="http://example.com/images/image-20230326182636448.png">
+<meta property="og:image" content="http://example.com/images/image-20230326183322889.png">
+<meta property="og:image" content="http://example.com/images/image-20230326183553462.png">
+<meta property="og:image" content="http://example.com/images/image-20230326183949826.png">
+<meta property="og:image" content="http://example.com/images/image-20230326183823365.png">
+<meta property="og:image" content="http://example.com/images/image-20230326184237541.png">
+<meta property="og:image" content="http://example.com/images/image-20230326184653005.png">
+<meta property="og:image" content="http://example.com/images/image-20230326184703278.png">
+<meta property="og:image" content="http://example.com/images/image-20230326185302358.png">
+<meta property="og:image" content="http://example.com/images/image-20230326185251358.png">
+<meta property="og:image" content="http://example.com/images/image-20230326185801822.png">
+<meta property="og:image" content="http://example.com/images/image-20230326185815873.png">
+<meta property="article:published_time" content="2024-02-01T01:11:08.000Z">
+<meta property="article:modified_time" content="2024-02-01T01:11:52.247Z">
+<meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20230326104921193.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>指令系统 - XT-CODE-WORLD</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XT的代码空间</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://w.wallhaven.cc/full/wq/wallhaven-wq8ylp.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="指令系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-01 09:11" pubdate>
+          2024年2月1日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">指令系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h1><h2 id="机器指令"><a href="#机器指令" class="headerlink" title="机器指令"></a>机器指令</h2><blockquote>
+<p>  什么是机器指令，指令系统又是什么？</p>
+</blockquote>
+<p>人们把机器语言的语句叫做机器指令，把这些指令集合叫做指令系统。</p>
+<h3 id="指令的一般格式"><a href="#指令的一般格式" class="headerlink" title="指令的一般格式"></a>指令的一般格式</h3><p>指令是由<strong>操作码</strong>和<strong>地址码</strong>两部分组成的。（都是通过二进制描述）</p>
+<h4 id="1、操作码"><a href="#1、操作码" class="headerlink" title="1、操作码"></a><strong>1、操作码</strong></h4><ul>
+<li>  操作码是用来说明这条指令是用来完成什么样的操作的。</li>
+<li>  操作长度可以是固定的也可以是变化的。如果是固定的，便于硬件的设计，指令译码时间短，广泛运用于字长较长的计算机，如RISC。</li>
+<li>  如果是不固定的，可以有效的压缩操作码的平均长度，在字长较短的微型计算机中方广泛运用。操作码不固定会增加指令译码和分析的难度，使得控制器的设计复杂，通常使用扩展操作码技术使操作码的长度随着地址数的减少而增加。也就是不同的地址数可以有不同的操作数，从而有效缩短指令字长。</li>
+</ul>
+<p><img src="/../images/image-20230326104921193.png" srcset="/img/loading.gif" lazyload alt="image-20230326104921193"></p>
+<p>上图分析：</p>
+<ul>
+<li>  如果操作码是4位，最多有15条三地址指令，如果操作码是8位，最多有15条二地址指令；如果操作码是12位，最多有15条1地址指令。</li>
+<li>  三地址操作码每减少一种就可以多构造2^4种二地址操作码。可以看到如果操作码是8位时，1111被作为前四位的固定操作码，因为1111相当于是三地址码分给二地址码。</li>
+</ul>
+<h4 id="2、地址码"><a href="#2、地址码" class="headerlink" title="2、地址码"></a>2、地址码</h4><p>地址码是用来保存该指令的源操作数的地址。</p>
+<p>（下列指令都假设指令字长为32位。操作码固定为8位）</p>
+<h5 id="（1）四地址指令"><a href="#（1）四地址指令" class="headerlink" title="（1）四地址指令"></a>（1）四地址指令</h5><p><img src="/../images/image-20230326110522933.png" srcset="/img/loading.gif" lazyload alt="image-20230326110522933"></p>
+<p>OP是操作数，A1是第一操作数地址，A2是第二操作数地址，A3是结果地址，A4是下一条指令地址。</p>
+<p>该指令完成<img src="../../../../../相册/typora/image-20230326110715358.png" srcset="/img/loading.gif" lazyload alt="image-20230326110715358" style="zoom:67%;" />的操作。如果地址字段均指示主存的地址，则完成一条四地址指令，共需要访问4次存储器。寻址范围<img src="../../../../../相册/typora/image-20230326122031552.png" srcset="/img/loading.gif" lazyload alt="image-20230326122031552" style="zoom:67%;" />。</p>
+<h5 id="（2）三地址指令"><a href="#（2）三地址指令" class="headerlink" title="（2）三地址指令"></a>（2）三地址指令</h5><p><img src="/../images/image-20230326121334314.png" srcset="/img/loading.gif" lazyload alt="image-20230326121334314"></p>
+<p>完成<img src="../../../../../相册/typora/image-20230326121354765.png" srcset="/img/loading.gif" lazyload alt="image-20230326121354765" style="zoom:67%;" />指令，原来下一条指令地址利用PC去记录。完成一次指令需要访问4次存储器。寻址范围<img src="../../../../../相册/typora/image-20230326122112816.png" srcset="/img/loading.gif" lazyload alt="image-20230326122112816" style="zoom:67%;" />。</p>
+<h5 id="（3）二地址指令"><a href="#（3）二地址指令" class="headerlink" title="（3）二地址指令"></a>（3）二地址指令</h5><p><img src="/../images/image-20230326121516902.png" srcset="/img/loading.gif" lazyload alt="image-20230326121516902"></p>
+<p>完成<img src="../../../../../相册/typora/image-20230326121530791.png" srcset="/img/loading.gif" lazyload alt="image-20230326121530791" style="zoom:67%;" />指令，A1表示第一个操作数，A2表示第二操作数，二地址指令取消了A3地址保存结果，而是采用把结果覆盖到A1或者A2中。完成一次指令仍需要访问4次存储器。但是如果把结果保存在ACC中，就只需要3次访存就可以。寻址范围<img src="../../../../../相册/typora/image-20230326122142565.png" srcset="/img/loading.gif" lazyload alt="image-20230326122142565" style="zoom:67%;" />。</p>
+<h5 id="（4）一地址指令"><a href="#（4）一地址指令" class="headerlink" title="（4）一地址指令"></a>（4）一地址指令</h5><p><img src="/../images/image-20230326121847103.png" srcset="/img/loading.gif" lazyload alt="image-20230326121847103"></p>
+<p>完成<img src="../../../../../相册/typora/image-20230326122202153.png" srcset="/img/loading.gif" lazyload alt="image-20230326122202153" style="zoom:67%;" />指令操作。ACC参与存储和运算操作数，完成一条指令只需要2次访存。寻址范围<img src="../../../../../相册/typora/image-20230326122327067.png" srcset="/img/loading.gif" lazyload alt="image-20230326122327067" style="zoom:67%;" />。</p>
+<h5 id="（5）零地址指令"><a href="#（5）零地址指令" class="headerlink" title="（5）零地址指令"></a>（5）零地址指令</h5><p>指令中没有地址码，例如，空操作、停机、子程序返回、中断返回等。</p>
+<h3 id="指令字长"><a href="#指令字长" class="headerlink" title="指令字长"></a>指令字长</h3><p>指令字长取决于操作码长度、操作数地址长度、操作数地址个数。指令字长固定：指令字长=存储字长。指令字长可变：按字节的倍数变化。</p>
+<h2 id="操作数类型和操作类型"><a href="#操作数类型和操作类型" class="headerlink" title="操作数类型和操作类型"></a>操作数类型和操作类型</h2><h3 id="操作数类型"><a href="#操作数类型" class="headerlink" title="操作数类型"></a>操作数类型</h3><p>常见的操作数类型有地址、数字、字符、逻辑数据等。</p>
+<p>（1）地址</p>
+<p>地址就是无符号的整数。</p>
+<p>（2）数字</p>
+<p>包含定点数、浮点数、十进制数。</p>
+<p>（3）字符</p>
+<p>通常采用ACSⅡ码。</p>
+<p>（4）逻辑数据</p>
+<p>用于逻辑运算。</p>
+<h3 id="数据在存储器中的存放方式"><a href="#数据在存储器中的存放方式" class="headerlink" title="数据在存储器中的存放方式"></a>数据在存储器中的存放方式</h3><p><strong>1、从任意位置开始存储</strong></p>
+<p>优点：不浪费存储资源。</p>
+<p>缺点：除了访问一个字节之外，访问其它任何类型的数据， 都可能花费两个存储周期的时间。读写控制比较复杂。</p>
+<p><strong>2、从一个存储字的起始位置开始访问</strong></p>
+<p>优点：无论访问何种类型的数据，在一个周期内均可完成，读写控制简单。</p>
+<p>缺点：浪费存储资源。</p>
+<p><strong>3、边界对准方式</strong></p>
+<p>从地址的整数倍位置开始访问。</p>
+<h3 id="操作类型"><a href="#操作类型" class="headerlink" title="操作类型"></a>操作类型</h3><p><strong>1、数据传送</strong></p>
+<p>数据传送就是各种元器件之间的数据交互，例如寄存器与寄存器之间、寄存器与存储单元之间、存储单元与存储单元之间。</p>
+<p><strong>2、算术逻辑操作</strong></p>
+<p>加、减、乘、除、增 1、减 1、求补、浮点运算、十进制运算 与、或、非、异或、位操作、位测试、位清除、位求反</p>
+<p><strong>3、移位</strong></p>
+<p>分为算术移位、逻辑移位、循环移位。算术移位是对有符号的数操作，逻辑是无符号的数。</p>
+<p><strong>4、转移</strong></p>
+<p><strong>（1）无条件转移</strong></p>
+<p>不受约束，如“JMP X”。</p>
+<p><strong>（2）条件转移</strong></p>
+<p>根据当前指令执行结果来决定是否需要转移。</p>
+<img src="../../../../../相册/typora/image-20230326124216225.png" srcset="/img/loading.gif" lazyload alt="image-20230326124216225" style="zoom:67%;" />
+
+<p><strong>（3）调用和返回</strong></p>
+<p>需要重复利用同一个程序段时，将这个程序段设定为独立子程序，调用（CALL）和返回指令（RETURN）配合使用。</p>
+<p><strong>（4）陷阱与陷阱指令</strong></p>
+<ul>
+<li>  一般不提供给用户直接使用 在出现事故时，由 CPU 自动产生并执行（隐指令）</li>
+<li>  设置供用户使用的陷阱指令</li>
+</ul>
+<p><strong>（5）输入输出</strong></p>
+<p>端口中的内容读入到CPU 的寄存器、CPU 的寄存器输出到端口中的内容。</p>
+<p><strong>（6）其他</strong></p>
+<p>等待指令、停机指令、空操作指令、开中断指令等。</p>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><p>寻址方式就是确定本指令的数据地址以及下一跳指令地址的方法。寻址方式分为<strong>指令寻址和数据寻址</strong>。</p>
+<h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><p>分为<strong>顺序寻址</strong>和<strong>跳跃寻址</strong>。</p>
+<p>1、顺序寻址</p>
+<p>通过PC程序计数器自动加一形成下一条的地址。</p>
+<p>2、跳跃寻址</p>
+<p>当例如指令中是“JMP 7”，就直接跳到第7条指令。</p>
+<h3 id="数据寻址"><a href="#数据寻址" class="headerlink" title="数据寻址"></a>数据寻址</h3><p>数据寻址的地址由下面几部分组成。操作数的有效地址记为EA，是由寻址特征和形式地址共同决定的。</p>
+<p><img src="/../images/image-20230326125309276.png" srcset="/img/loading.gif" lazyload alt="image-20230326125309276"></p>
+<h4 id="1、立即寻址"><a href="#1、立即寻址" class="headerlink" title="1、立即寻址"></a>1、立即寻址</h4><p><img src="/../images/image-20230326125508622.png" srcset="/img/loading.gif" lazyload alt="image-20230326125508622"></p>
+<p>操作数就在指令字里，A就是操作数本身，不是地址。数据采用补码的形式存放。优点是只要取指令就有操作数，在执行阶段不必访问存储器。A的位数限制立即数的范围。</p>
+<h4 id="2、直接寻址"><a href="#2、直接寻址" class="headerlink" title="2、直接寻址"></a>2、直接寻址</h4><p><img src="/../images/image-20230326125830548.png" srcset="/img/loading.gif" lazyload alt="image-20230326125830548"></p>
+<p>直接寻址中指令字中的形式地址A就是操作数的真实地址EA。优点是寻找操作数简单，在指令执行时对主存访问一次。但是它的缺点是限制了操作数的寻址范围。而且必须修改A的值才可以修改操作数的地址。</p>
+<h4 id="3、隐含寻址"><a href="#3、隐含寻址" class="headerlink" title="3、隐含寻址"></a>3、隐含寻址</h4><p><img src="/../images/image-20230326182319815.png" srcset="/img/loading.gif" lazyload alt="image-20230326182319815"></p>
+<p>其操作数地址隐含在操作码中或者某个寄存器中，这导致指令字中少了一个地址字段，可以缩短指令字长。</p>
+<h4 id="4、间接寻址"><a href="#4、间接寻址" class="headerlink" title="4、间接寻址"></a>4、间接寻址</h4><p><img src="/../images/image-20230326182636448.png" srcset="/img/loading.gif" lazyload alt="image-20230326182636448"></p>
+<p>间接寻址不直接将操作数的地址存在A中，而是指出操作数有效地址所在的存储单元地址。有效地址是通过形式地址间接提供的，注意这里的存储器都是主存，之后会有存储在寄存器上的。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>  这种寻址和直接寻址相比，扩大了寻址范围。当多次间接寻址时，可以用存储字的首位来标记间接寻址是否结束。</li>
+<li>  便于编制程序。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>  指令执行时需要两次访问主存。会导致执行时间过长。</li>
+</ul>
+<h4 id="5、寄存器寻址"><a href="#5、寄存器寻址" class="headerlink" title="5、寄存器寻址"></a>5、寄存器寻址</h4><p><img src="/../images/image-20230326183322889.png" srcset="/img/loading.gif" lazyload alt="image-20230326183322889"></p>
+<p>地址码直接指出了寄存器的编号，EA=R，由于寄存器寻址在执行过程中不用访问主存，所以执行速度快。同时，指令字段短，节省了存储空间。</p>
+<h4 id="6、寄存器间接寻址"><a href="#6、寄存器间接寻址" class="headerlink" title="6、寄存器间接寻址"></a>6、寄存器间接寻址</h4><p><img src="/../images/image-20230326183553462.png" srcset="/img/loading.gif" lazyload alt="image-20230326183553462"></p>
+<p>指令执行阶段需要访存主存。有效地址在寄存器中，操作数在主存中。它比间接寻址少访存一次。</p>
+<h4 id="7、基址寻址"><a href="#7、基址寻址" class="headerlink" title="7、基址寻址"></a>7、基址寻址</h4><p><img src="/../images/image-20230326183949826.png" srcset="/img/loading.gif" lazyload alt="image-20230326183949826"></p>
+<p>基址寻址需要设有基址寄存器（BR），操作数有效地址为指令字中的形式地址与基址寄存器中的内容相加。基址寄存器分为隐式和显式。</p>
+<p>（1）采用专用基址寄存器</p>
+<p><img src="/../images/image-20230326183823365.png" srcset="/img/loading.gif" lazyload alt="image-20230326183823365"></p>
+<ul>
+<li>  可以扩大寻址范围</li>
+<li>  有利于多道程序</li>
+<li>  BR内容由操作系统或者管理程序确定</li>
+<li>  在程序执行的过程中，BR不变，A可以变。</li>
+</ul>
+<p>（2）采用通用寄存器。</p>
+<p><img src="/../images/image-20230326184237541.png" srcset="/img/loading.gif" lazyload alt="image-20230326184237541"></p>
+<ul>
+<li>  由用户指定哪个通用寄存器作为基址寄存器</li>
+<li>  基址寄存器的内容由操作系统确定</li>
+<li>  在程序执行过程中，R内容不变，A可变。</li>
+</ul>
+<h4 id="8、变址寻址"><a href="#8、变址寻址" class="headerlink" title="8、变址寻址"></a>8、变址寻址</h4><p>变址寻址和基址寻址非常相似。</p>
+<p><img src="/../images/image-20230326184653005.png" srcset="/img/loading.gif" lazyload alt="image-20230326184653005"></p>
+<p><img src="/../images/image-20230326184703278.png" srcset="/img/loading.gif" lazyload alt="image-20230326184703278"></p>
+<p>由于两者的应用场景不同，来区别：</p>
+<ul>
+<li>  IX 的内容由用户给定</li>
+<li>  在程序的执行过程中 IX 内容可变，形式地址 A 不变</li>
+<li>  和基址寻址相比，基址寻址主要是用来为程序或者数据分配存储空间。而变址寻址主要是处理数组问题。</li>
+</ul>
+<h4 id="9、相对寻址"><a href="#9、相对寻址" class="headerlink" title="9、相对寻址"></a>9、相对寻址</h4><p><img src="/../images/image-20230326185302358.png" srcset="/img/loading.gif" lazyload alt="image-20230326185302358"></p>
+<p><img src="/../images/image-20230326185251358.png" srcset="/img/loading.gif" lazyload alt="image-20230326185251358"></p>
+<p>相对寻址的有效地址是程序计数器PC和形式地址A相加而成。A是相对于当前指令的位移量。A可正可负，通常用补码表示。相对寻址常被用来转移类指令。</p>
+<p>最大特点是转移地址不固定，对于编写浮动程序有利。A的位数决定操作数的寻址范围。</p>
+<h4 id="10、堆栈寻址"><a href="#10、堆栈寻址" class="headerlink" title="10、堆栈寻址"></a>10、堆栈寻址</h4><p><img src="/../images/image-20230326185801822.png" srcset="/img/loading.gif" lazyload alt="image-20230326185801822"></p>
+<p><img src="/../images/image-20230326185815873.png" srcset="/img/loading.gif" lazyload alt="image-20230326185815873"></p>
+<h2 id="指令格式举例"><a href="#指令格式举例" class="headerlink" title="指令格式举例"></a>指令格式举例</h2><p>指令格式这一节主要讲设计指令时需要考虑的各种因素，并且举例一些设计相对来说合理的格式。</p>
+<h3 id="设计格式需要考虑的因素"><a href="#设计格式需要考虑的因素" class="headerlink" title="设计格式需要考虑的因素"></a>设计格式需要考虑的因素</h3><p>指令系统集中反映了机器的性能，一个好的指令系统既需要指令丰富，又需要机器执行程序时快速、占用空间小、搞笑。并且指令系统需要考虑向上兼容，也就是高版本需要兼容低版本。</p>
+<p>指令格式可以从以下几个方面考虑：</p>
+<ul>
+<li>  操作类型</li>
+<li>  数据类型</li>
+<li>  指令格式</li>
+<li>  寻址方式</li>
+<li>  寄存器个数</li>
+</ul>
+<h3 id="指令格式举例-1"><a href="#指令格式举例-1" class="headerlink" title="指令格式举例"></a>指令格式举例</h3><h4 id="1、PDP-8"><a href="#1、PDP-8" class="headerlink" title="1、PDP-8"></a>1、PDP-8</h4><p>指令字长：12位，CPU中只设置一个通用寄存器ACC,其主存分为若干个容量相同的存储空间。支持间接寻址、变址寻址、相对寻址。加上操作码扩展技术。共有35条指令。</p>
+<h4 id="2、PDP-11"><a href="#2、PDP-11" class="headerlink" title="2、PDP-11"></a>2、PDP-11</h4><p>机器字长16位，CPU内设8个16位通用寄存器，其中两寄存器有特殊作用，一个用作堆栈指针SP，一个用作程序计数器PC。</p>
+<h4 id="3、IBM360"><a href="#3、IBM360" class="headerlink" title="3、IBM360"></a>3、IBM360</h4><p>IBM360属于系统机，也就是基本指令系统相同的一系列机子。机器字长32位，CPU中16个32位通用寄存器（用户可以任选一个作为基址寄存器BR或者变址寄存器IX），4个双精度（64位）浮点寄存器。</p>
+<h4 id="4、Intel8086"><a href="#4、Intel8086" class="headerlink" title="4、Intel8086"></a>4、Intel8086</h4><p>这款机器是微型计算机，指令字长是1-6字节，不定长。</p>
+<h3 id="指令格式设计举例"><a href="#指令格式设计举例" class="headerlink" title="指令格式设计举例"></a>指令格式设计举例</h3><h2 id="RISC"><a href="#RISC" class="headerlink" title="RISC"></a>RISC</h2><p>RISC即为精简指令系统计算机（Reduced Instruction Set Computer）。</p>
+<h3 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h3><p>因为当时20世纪70年代中期，发现典型程序中 80% 的语句仅仅使用处理机中 20% 的指令；执行频度高的简单指令，因复杂指令的存在，执行速度无法提高；能否用 20% 的简单指令组合不常用的 80% 的指令功能。于是就引出了RISC技术。</p>
+<h3 id="RISC的主要特征"><a href="#RISC的主要特征" class="headerlink" title="RISC的主要特征"></a>RISC的主要特征</h3><ul>
+<li>  用使用频率高的简单指令组合成为复杂指令。</li>
+<li>  指令长度固定、指令格式种类少、寻址方式少。</li>
+<li>  只有取数（LOAD）存数（STORE）指令访存。</li>
+<li>  CPU中有多个通用寄存器</li>
+<li>  采用流水线技术，一个时钟周期内完成一条指令。</li>
+<li>  控制器采用组合逻辑控制，不作微程序控制。</li>
+<li>  采用优化的编译程序。</li>
+</ul>
+<h3 id="CISC"><a href="#CISC" class="headerlink" title="CISC"></a>CISC</h3><ul>
+<li><p>  系统指令复杂庞大，各种指令使用频度相差大 </p>
+</li>
+<li><p>  指令长度不固定、指令格式种类多、寻址方式多 </p>
+</li>
+<li><p>  访存指令不受限制 </p>
+</li>
+<li><p>  大多数指令需要多个时钟周期执行完毕 </p>
+</li>
+<li><p>  采用微程序控制器 </p>
+</li>
+<li><p>  CPU中设有专用寄存器</p>
+</li>
+</ul>
+<h3 id="RISC和CISC的比较"><a href="#RISC和CISC的比较" class="headerlink" title="RISC和CISC的比较"></a>RISC和CISC的比较</h3><p>1、充分利用了VLSI芯片的面积</p>
+<p>2、提高计算机运行速度</p>
+<p>3、便于设计、可降低成本、提高可靠性</p>
+<p>4、有效支持高级语言程序</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>指令系统</div>
+      <div>http://example.com/2024/02/01/指令系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Peter Xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/01/CPU%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD/" title="CPU的结构和功能">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CPU的结构和功能</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95/" title="计算机运算方法">
+                        <span class="hidden-mobile">计算机运算方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
