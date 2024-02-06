@@ -16,18 +16,20 @@
   <meta name="author" content="Peter Xu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="黑马头条项目笔记">
+    <meta name="description" content="黑马头条项目笔记 1,在默认频道展示10条文章信息 2,可以切换频道查看不同种类文章 3,当用户下拉可以加载最新的文章（分页）本页文章列表中发布时间为最大的时间为依据 4,当用户上拉可以加载更多的文章信息（按照发布时间）本页文章列表中发布时间最小的时间为依据 5，如果是当前频道的首页，前端传递默认参数：  maxBehotTime：0（毫秒）  minBehotTime：2000000000000">
 <meta property="og:type" content="article">
 <meta property="og:title" content="黑马头条项目笔记">
 <meta property="og:url" content="http://example.com/2024/01/29/%E9%BB%91%E9%A9%AC%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="XT-CODE-WORLD">
-<meta property="og:description" content="黑马头条项目笔记">
+<meta property="og:description" content="黑马头条项目笔记 1,在默认频道展示10条文章信息 2,可以切换频道查看不同种类文章 3,当用户下拉可以加载最新的文章（分页）本页文章列表中发布时间为最大的时间为依据 4,当用户上拉可以加载更多的文章信息（按照发布时间）本页文章列表中发布时间最小的时间为依据 5，如果是当前频道的首页，前端传递默认参数：  maxBehotTime：0（毫秒）  minBehotTime：2000000000000">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20240201152142797.png">
 <meta property="article:published_time" content="2024-01-29T08:27:12.000Z">
-<meta property="article:modified_time" content="2024-01-29T08:28:08.681Z">
+<meta property="article:modified_time" content="2024-02-01T07:23:03.691Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="黑马头条">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20240201152142797.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -237,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          403 字
         
       </span>
     
@@ -248,7 +250,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -291,7 +293,53 @@
             
               <div class="markdown-body">
                 
-                <h1 id="黑马头条项目笔记"><a href="#黑马头条项目笔记" class="headerlink" title="黑马头条项目笔记"></a>黑马头条项目笔记</h1>
+                <h1 id="黑马头条项目笔记"><a href="#黑马头条项目笔记" class="headerlink" title="黑马头条项目笔记"></a>黑马头条项目笔记</h1><p><img src="/../images/image-20240201152142797.png" srcset="/img/loading.gif" lazyload alt="image-20240201152142797"></p>
+<p>1,在默认频道展示10条文章信息</p>
+<p>2,可以切换频道查看不同种类文章</p>
+<p>3,当用户下拉可以加载最新的文章（分页）本页文章列表中发布时间为最大的时间为依据</p>
+<p>4,当用户上拉可以加载更多的文章信息（按照发布时间）本页文章列表中发布时间最小的时间为依据</p>
+<p>5，如果是当前频道的首页，前端传递默认参数：</p>
+<ul>
+<li><p>maxBehotTime：0（毫秒）</p>
+</li>
+<li><p>minBehotTime：20000000000000（毫秒）—&gt;2063年</p>
+</li>
+</ul>
+<h3 id="1-5-接口定义"><a href="#1-5-接口定义" class="headerlink" title="1.5)接口定义"></a>1.5)接口定义</h3><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>加载首页</strong></th>
+<th><strong>加载更多</strong></th>
+<th><strong>加载最新</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接口路径</td>
+<td>/api/v1/article/load</td>
+<td>/api/v1/article/loadmore</td>
+<td>/api/v1/article/loadnew</td>
+</tr>
+<tr>
+<td>请求方式</td>
+<td>POST</td>
+<td>POST</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>ArticleHomeDto</td>
+<td>ArticleHomeDto</td>
+<td>ArticleHomeDto</td>
+</tr>
+<tr>
+<td>响应结果</td>
+<td>ResponseResult</td>
+<td>ResponseResult</td>
+<td>ResponseResult</td>
+</tr>
+</tbody></table>
+
                 
               </div>
             
