@@ -23,22 +23,22 @@
 <meta property="og:site_name" content="XT-CODE-WORLD">
 <meta property="og:description" content="用户级线程   首先什么是用户级线程？  在回答这个问题之前我们需要先搞清楚什么是线程，线程就是指令切换，进程是指令加上资源。也就是线程是将资源分离了，分而治之。既保留了并发的优点又避免了进程切换的代价。线程的切换实质上就是映射表不变PC指针改变。那什么是用户级线程呢，我们后面再讲。 线程的价值 上面我们讲过了，线程就是只有切换指令而没有切换资源，这样的好处是什么？  如上面的两幅图，如果没有用到">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421125943191.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421130000706.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421131029754.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421131308941.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421131344430.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421131529404.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421135319512.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421135950096.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421140642940.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230421141024704.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421125943191.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421130000706.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421131029754.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421131308941.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421131344430.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421131529404.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421135319512.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421135950096.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421140642940.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230421141024704.png">
 <meta property="article:published_time" content="2024-02-01T00:53:54.000Z">
-<meta property="article:modified_time" content="2024-02-01T01:03:04.535Z">
+<meta property="article:modified_time" content="2024-02-06T16:13:11.486Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/相册/typora/image-20230421125943191.png">
+<meta name="twitter:image" content="http://example.com/2024/02/01/images/image-20230421125943191.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -307,19 +307,19 @@
 </blockquote>
 <p>在回答这个问题之前我们需要先搞清楚什么是线程，线程就是指令切换，进程是指令加上资源。也就是线程是将资源分离了，分而治之。既保留了并发的优点又避免了进程切换的代价。线程的切换实质上就是映射表不变PC指针改变。那什么是用户级线程呢，我们后面再讲。</p>
 <h2 id="线程的价值"><a href="#线程的价值" class="headerlink" title="线程的价值"></a>线程的价值</h2><p> 上面我们讲过了，线程就是只有切换指令而没有切换资源，这样的好处是什么？</p>
-<p><img src="../../../../../相册/typora/image-20230421125943191.png" srcset="/img/loading.gif" lazyload alt="image-20230421125943191" style="zoom: 25%;" /><img src="../../../../../相册/typora/image-20230421130000706.png" srcset="/img/loading.gif" lazyload alt="image-20230421130000706" style="zoom:25%;" /></p>
+<p><img src="../images/image-20230421125943191.png" srcset="/img/loading.gif" lazyload alt="image-20230421125943191" style="zoom: 25%;" /><img src="../images/image-20230421130000706.png" srcset="/img/loading.gif" lazyload alt="image-20230421130000706" style="zoom:25%;" /></p>
 <p>如上面的两幅图，如果没有用到多线程，加载所有资源都要用到一个线程，那么可能就会造成一开始网站上一点东西都没有，但是突然一下全部加载好了，这会造成用户体验极差。</p>
 <p>多线程是利用同一张映射表，也就是资源是一样的。</p>
 <h2 id="Yield"><a href="#Yield" class="headerlink" title="Yield()"></a>Yield()</h2><p>yield()函数就是用来切换线程的。函数在调用Yield()函数的时候并不知道自己要切换到哪个线程中，只是表明放弃对CPU的占有。Yield()函数是用户主动调用的，而不是放到内核中执行。</p>
 <p>下面我们就通过代码的方式来说明Yield()的使用。</p>
-<h3 id="两个执行序列一个栈"><a href="#两个执行序列一个栈" class="headerlink" title="两个执行序列一个栈"></a>两个执行序列一个栈</h3><img src="../../../../../相册/typora/image-20230421131029754.png" srcset="/img/loading.gif" lazyload alt="image-20230421131029754" style="zoom:50%;" />
+<h3 id="两个执行序列一个栈"><a href="#两个执行序列一个栈" class="headerlink" title="两个执行序列一个栈"></a>两个执行序列一个栈</h3><img src="../images/image-20230421131029754.png" srcset="/img/loading.gif" lazyload alt="image-20230421131029754" style="zoom:50%;" />
 
 <p>如上面的代码执行过程如下：</p>
 <p>1、从A()函数开始，调用B()函数，并将104压入栈中。</p>
-<p>2、进入B函数，调用Yield()函数，将204压入栈中，此时的csp是：<img src="../../../../../相册/typora/image-20230421131308941.png" srcset="/img/loading.gif" lazyload alt="image-20230421131308941" style="zoom:50%;" />然后调用Yield()函数跳转到300。</p>
-<img src="../../../../../相册/typora/image-20230421131344430.png" srcset="/img/loading.gif" lazyload alt="image-20230421131344430" style="zoom:67%;" />
+<p>2、进入B函数，调用Yield()函数，将204压入栈中，此时的csp是：<img src="../images/image-20230421131308941.png" srcset="/img/loading.gif" lazyload alt="image-20230421131308941" style="zoom:50%;" />然后调用Yield()函数跳转到300。</p>
+<img src="../images/image-20230421131344430.png" srcset="/img/loading.gif" lazyload alt="image-20230421131344430" style="zoom:67%;" />
 
-<p>3、执行300处的C函数，调用D()，并将304压入栈中，最后调用D()执行Yield()函数，压入404，此时的csp为<img src="../../../../../相册/typora/image-20230421131529404.png" srcset="/img/loading.gif" lazyload alt="image-20230421131529404" style="zoom:50%;" />。</p>
+<p>3、执行300处的C函数，调用D()，并将304压入栈中，最后调用D()执行Yield()函数，压入404，此时的csp为<img src="../images/image-20230421131529404.png" srcset="/img/loading.gif" lazyload alt="image-20230421131529404" style="zoom:50%;" />。</p>
 <p>4、也就是返回到了B函数的}。</p>
 <blockquote>
 <p>  思考：再往下执行会出现什么问题？</p>
@@ -330,19 +330,19 @@
 </blockquote>
 <p>上面暴露出了当两个执行序列公用一个栈的话，会造成栈中数据混乱的情况。那么我们就用两个栈保存线程的数据。</p>
 <h3 id="两个栈解决问题"><a href="#两个栈解决问题" class="headerlink" title="两个栈解决问题"></a>两个栈解决问题</h3><p>两个栈和一个栈的Yield代码区别就在于引入了TCB，这个TCB和PCB相似，在这里TCB用于存栈顶地址，当调用了Yield(），首相先将csp中的值存入TCB中的esp也就是保存栈的信息。</p>
-<img src="../../../../../相册/typora/image-20230421135319512.png" srcset="/img/loading.gif" lazyload alt="image-20230421135319512" style="zoom:50%;" />
+<img src="../images/image-20230421135319512.png" srcset="/img/loading.gif" lazyload alt="image-20230421135319512" style="zoom:50%;" />
 
 <p>上面的jmp204应该去除，因为跳转地址保存在栈中。</p>
 <blockquote>
 <p>  现在我们对于两个线程的切换就是两个TCB、两个栈、切换的PC在栈中。也就是我们需要做到这几件事，那么谁帮我们来做，那就是ThreadCreate来创建线程并且初始化这些。</p>
 </blockquote>
-<h2 id="ThreadCreate"><a href="#ThreadCreate" class="headerlink" title="ThreadCreate()"></a>ThreadCreate()</h2><img src="../../../../../相册/typora/image-20230421135950096.png" srcset="/img/loading.gif" lazyload alt="image-20230421135950096" style="zoom:67%;" />
+<h2 id="ThreadCreate"><a href="#ThreadCreate" class="headerlink" title="ThreadCreate()"></a>ThreadCreate()</h2><img src="../images/image-20230421135950096.png" srcset="/img/loading.gif" lazyload alt="image-20230421135950096" style="zoom:67%;" />
 
 <p>通过上面的代码我们可以看出：ThreadCreate就是创建了一个TCB，并且创建了一个新的栈，来保存新线程的信息。</p>
-<h2 id="为什么叫用户级线程"><a href="#为什么叫用户级线程" class="headerlink" title="为什么叫用户级线程"></a>为什么叫用户级线程</h2><img src="../../../../../相册/typora/image-20230421140642940.png" srcset="/img/loading.gif" lazyload alt="image-20230421140642940" style="zoom:67%;" />
+<h2 id="为什么叫用户级线程"><a href="#为什么叫用户级线程" class="headerlink" title="为什么叫用户级线程"></a>为什么叫用户级线程</h2><img src="../images/image-20230421140642940.png" srcset="/img/loading.gif" lazyload alt="image-20230421140642940" style="zoom:67%;" />
 
 <p>如果当线程需要调用硬件时，如果进程阻塞，就会切换到另一个进程，那么在原来进程上的所有线程将会处于宕机状态。因为操作系统感知不到用户级线程。</p>
-<h2 id="引出内核级线程"><a href="#引出内核级线程" class="headerlink" title="引出内核级线程"></a>引出内核级线程</h2><img src="../../../../../相册/typora/image-20230421141024704.png" srcset="/img/loading.gif" lazyload alt="image-20230421141024704" style="zoom:67%;" />
+<h2 id="引出内核级线程"><a href="#引出内核级线程" class="headerlink" title="引出内核级线程"></a>引出内核级线程</h2><img src="../images/image-20230421141024704.png" srcset="/img/loading.gif" lazyload alt="image-20230421141024704" style="zoom:67%;" />
 
 <p>如果TCB在核心的话，再分配CPU调度的时候会更加有优势。</p>
 

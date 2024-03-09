@@ -1,0 +1,1049 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peter Xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="重要知识点汇总1 Java进程、线程1.1 进程程序由指令和数据组成，但这些指令要运行，数据要读写，就必须将指令加载至 CPU，数据加载至内存。在指令运行过程中还需要用到磁盘、网络等设备。进程就是用来加载指令、管理内存、管理 IO 的当一个程序被运行，从磁盘加载这个程序的代码至内存，这时就开启了一个进程。进程就可以视为程序的一个实例。大部分程序可以同时运行多个实例进程（例如记事本、画图、浏览器等）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程面试题">
+<meta property="og:url" content="http://example.com/2024/02/19/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="XT-CODE-WORLD">
+<meta property="og:description" content="重要知识点汇总1 Java进程、线程1.1 进程程序由指令和数据组成，但这些指令要运行，数据要读写，就必须将指令加载至 CPU，数据加载至内存。在指令运行过程中还需要用到磁盘、网络等设备。进程就是用来加载指令、管理内存、管理 IO 的当一个程序被运行，从磁盘加载这个程序的代码至内存，这时就开启了一个进程。进程就可以视为程序的一个实例。大部分程序可以同时运行多个实例进程（例如记事本、画图、浏览器等）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20240219160857563.png">
+<meta property="og:image" content="http://example.com/images/image-20240219160913141.png">
+<meta property="og:image" content="http://example.com/images/image-20240219160943518.png">
+<meta property="og:image" content="http://example.com/images/image-20240219164656074.png">
+<meta property="og:image" content="http://example.com/images/image-20240220101311772.png">
+<meta property="og:image" content="http://example.com/images/image-20240220101412522.png">
+<meta property="og:image" content="http://example.com/images/image-20240220101614632.png">
+<meta property="og:image" content="http://example.com/images/image-20240220103859689.png">
+<meta property="og:image" content="http://example.com/images/image-20240220103906771.png">
+<meta property="og:image" content="http://example.com/images/image-20240220110215342.png">
+<meta property="og:image" content="http://example.com/images/image-20240220110721207.png">
+<meta property="og:image" content="http://example.com/images/image-20240220110730235.png">
+<meta property="og:image" content="http://example.com/images/image-20240220110747417.png">
+<meta property="og:image" content="http://example.com/images/image-20240220110800928.png">
+<meta property="og:image" content="http://example.com/images/image-20240220113657951.png">
+<meta property="article:published_time" content="2024-02-19T07:45:03.000Z">
+<meta property="article:modified_time" content="2024-02-21T01:27:00.580Z">
+<meta property="article:author" content="Peter Xu">
+<meta property="article:tag" content="并发面试题">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20240219160857563.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>并发编程面试题 - XT-CODE-WORLD</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XT的代码空间</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://w.wallhaven.cc/full/wq/wallhaven-wq8ylp.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="并发编程面试题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-19 15:45" pubdate>
+          2024年2月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          106 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">并发编程面试题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="重要知识点汇总"><a href="#重要知识点汇总" class="headerlink" title="重要知识点汇总"></a>重要知识点汇总</h1><h2 id="1-Java进程、线程"><a href="#1-Java进程、线程" class="headerlink" title="1 Java进程、线程"></a>1 Java进程、线程</h2><h3 id="1-1-进程"><a href="#1-1-进程" class="headerlink" title="1.1 进程"></a>1.1 进程</h3><p>程序由指令和数据组成，但这些指令要运行，数据要读写，就必须将指令加载至 CPU，数据加载至内存。在指令运行过程中还需要用到磁盘、网络等设备。进程就是用来加载指令、管理内存、管理 IO 的当一个程序被运行，从磁盘加载这个程序的代码至内存，这时就开启了一个进程。进程就可以视为程序的一个实例。大部分程序可以同时运行多个实例进程（例如记事本、画图、浏览器等），也有的程序只能启动一个实例进程（例如网易云音乐、360 安全卫士等）</p>
+<h3 id="1-2-线程"><a href="#1-2-线程" class="headerlink" title="1.2 线程"></a>1.2 线程</h3><ul>
+<li>  一个进程之内可以分为一到多个线程。</li>
+<li>  一个线程就是一个指令流，将指令流中的一条条指令以一定的顺序交给 CPU 执行</li>
+<li>  Java 中，线程作为最小调度单位，进程作为资源分配的最小单位。 在 windows 中进程是不活动的，只是作为线程的容器</li>
+</ul>
+<h3 id="1-3-并行与并发"><a href="#1-3-并行与并发" class="headerlink" title="1.3 并行与并发"></a>1.3 <strong>并行与并发</strong></h3><p>单核 cpu 下，线程实际还是 串行执行 的。操作系统中有一个组件叫做任务调度器，将 cpu 的时间片（windows下时间片最小约为 15 毫秒）分给不同的程序使用，只是由于 cpu 在线程间（时间片很短）的切换非常快，人类感觉是 同时运行的 。总结为一句话就是： 微观串行，宏观并行 ，一般会将这种 线程轮流使用 CPU 的做法称为并发， concurrent。</p>
+<h2 id="2-Java线程"><a href="#2-Java线程" class="headerlink" title="2 Java线程"></a>2 Java线程</h2><h3 id="2-1-创建运行线程"><a href="#2-1-创建运行线程" class="headerlink" title="2.1 创建运行线程"></a>2.1 创建运行线程</h3><p>创建共有3个方式：</p>
+<ul>
+<li>  直接使用Thread</li>
+<li>  使用Runnable配合Thread</li>
+<li>  FutureTask配合Thread</li>
+</ul>
+<h4 id="2-1-1-直接使用Thread"><a href="#2-1-1-直接使用Thread" class="headerlink" title="2.1.1 直接使用Thread"></a>2.1.1 直接使用Thread</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>()&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">//要执行的任务</span><br>    &#125;<br>&#125;<br>t.start();<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-1-2-使用Runnable配合Thread"><a href="#2-1-2-使用Runnable配合Thread" class="headerlink" title="2.1.2 使用Runnable配合Thread"></a>2.1.2 使用Runnable配合Thread</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Runnable</span> <span class="hljs-variable">runnable</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>()&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">//要执行的任务</span><br>    &#125;<br>&#125;<br><span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(runnable);<br>t.start();<br></code></pre></td></tr></table></figure>
+
+<p>Runnable本质还是用Thread创建线程。</p>
+<h4 id="2-1-3-FutureTask配合Thread"><a href="#2-1-3-FutureTask配合Thread" class="headerlink" title="2.1.3 FutureTask配合Thread"></a>2.1.3 FutureTask配合Thread</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建任务对象</span><br>FutureTask&lt;Integer&gt; task3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FutureTask</span>&lt;&gt;(() -&gt; &#123;<br> log.debug(<span class="hljs-string">&quot;hello&quot;</span>);<br> <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;<br>&#125;);<br><span class="hljs-comment">// 参数1 是任务对象; 参数2 是线程名字，推荐</span><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(task3, <span class="hljs-string">&quot;t3&quot;</span>).start();<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-查看进程线程方法"><a href="#2-2-查看进程线程方法" class="headerlink" title="2.2 查看进程线程方法"></a>2.2 查看进程线程方法</h3><p><strong>windows</strong></p>
+<ul>
+<li>  任务管理器可以查看进程和线程数，也可以用来杀死进程</li>
+<li>  tasklist 查看进程</li>
+<li>  taskkill 杀死进程</li>
+</ul>
+<p><strong>linux</strong></p>
+<ul>
+<li>  ps -fe 查看所有进程</li>
+<li>  ps -fT -p <PID> 查看某个进程（PID）的所有线程</li>
+<li>  kill 杀死进程</li>
+<li>  top 按大写 H 切换是否显示线程</li>
+<li>  top -H -p <PID> 查看某个进程（PID）的所有线程</li>
+</ul>
+<p><strong>Java</strong></p>
+<ul>
+<li>  jps 命令查看所有 Java 进程</li>
+<li>  jstack <PID> 查看某个 Java 进程（PID）的所有线程状态</li>
+<li>  jconsole 来查看某个 Java 进程中线程的运行情况（图形界面）</li>
+</ul>
+<h3 id="2-3-常见方法"><a href="#2-3-常见方法" class="headerlink" title="2.3 常见方法"></a>2.3 常见方法</h3><p><img src="/../images/image-20240219160857563.png" srcset="/img/loading.gif" lazyload alt="image-20240219160857563"><img src="/../images/image-20240219160913141.png" srcset="/img/loading.gif" lazyload alt="image-20240219160913141"><img src="/../images/image-20240219160943518.png" srcset="/img/loading.gif" lazyload alt="image-20240219160943518"></p>
+<h3 id="2-4-run和start"><a href="#2-4-run和start" class="headerlink" title="2.4 run和start"></a>2.4 run和start</h3><ul>
+<li><p>  直接调用 run 是在主线程中执行了 run，没有启动新的线程 </p>
+</li>
+<li><p>  使用 start 是启动新的线程，通过新的线程间接执行 run 中的代码</p>
+</li>
+</ul>
+<h3 id="2-5-sleep和yield"><a href="#2-5-sleep和yield" class="headerlink" title="2.5 sleep和yield"></a>2.5 sleep和yield</h3><p><strong>sleep</strong></p>
+<ul>
+<li>  调用 sleep 会让当前线程从 <em>Running</em> 进入 <em>Timed Waiting</em> 状态（阻塞）</li>
+<li>  其它线程可以使用 interrupt 方法打断正在睡眠的线程，这时 sleep 方法会抛出 InterruptedException</li>
+<li>  睡眠结束后的线程未必会立刻得到执行</li>
+<li>  建议用 TimeUnit 的 sleep 代替 Thread 的 sleep 来获得更好的可读性</li>
+<li>  sleep多用于无需锁同步的场景。</li>
+</ul>
+<p><strong>yield</strong></p>
+<ul>
+<li>  调用 yield 会让当前线程从 <em>Running</em> 进入 <em>Runnable</em> 就绪状态，然后调度执行其它线程</li>
+<li>  具体的实现依赖于操作系统的任务调度器</li>
+</ul>
+<h3 id="2-6-join"><a href="#2-6-join" class="headerlink" title="2.6 join"></a>2.6 join</h3><ul>
+<li>  join是使线程进入阻塞，当该线程运行结束后，阻塞释放。</li>
+</ul>
+<h3 id="2-7-interrupt"><a href="#2-7-interrupt" class="headerlink" title="2.7 interrupt"></a>2.7 interrupt</h3><p>用于打断sleep、wait、join，这几个方法都会让线程进入阻塞状态，打断 sleep 的线程, 会清空打断状态，以 sleep 为例。</p>
+<h3 id="2-8-守护线程"><a href="#2-8-守护线程" class="headerlink" title="2.8 守护线程"></a>2.8 守护线程</h3><ul>
+<li><p>  垃圾回收器线程就是一种守护线程</p>
+</li>
+<li><p>Tomcat 中的 Acceptor 和 Poller 线程都是守护线程，所以 Tomcat 接收到 shutdown 命令后，不会等</p>
+<p>  待它们处理完当前请求</p>
+</li>
+</ul>
+<h2 id="3-共享模型——管程"><a href="#3-共享模型——管程" class="headerlink" title="3 共享模型——管程"></a>3 共享模型——管程</h2><ul>
+<li>  共享问题</li>
+<li>  synchronized</li>
+<li>  线程安全分析</li>
+<li>  Monitor</li>
+<li>  wait/notify</li>
+<li>  线程状态转换</li>
+<li>  活跃性</li>
+<li>  Lock</li>
+</ul>
+<h3 id="3-1-共享问题"><a href="#3-1-共享问题" class="headerlink" title="3.1 共享问题"></a>3.1 共享问题</h3><p>共享问题就是当一个资源有两个以及以上的人访问时，如果不加锁机制，会导致资源业务失败。</p>
+<p>多个线程访问共享资源时没有问题，但是读写时会出现指令交错。而这样的代码块称为临界区。</p>
+<p><strong>竞态条件Race Condition</strong></p>
+<p>多个线程在临界区内执行，由于代码的<strong>执行序列不同</strong>而导致结果无法预测，称之为发生了<strong>竞态条件</strong></p>
+<h3 id="3-2-synchronized（对象锁）"><a href="#3-2-synchronized（对象锁）" class="headerlink" title="3.2 synchronized（对象锁）"></a>3.2 synchronized（对象锁）</h3><p>解决共享问题的方案：</p>
+<ul>
+<li>  阻塞式的解决方案：synchronized，Lock</li>
+<li>  非阻塞式的解决方案：原子变量</li>
+</ul>
+<h3 id="3-3-变量的线程安全"><a href="#3-3-变量的线程安全" class="headerlink" title="3.3  变量的线程安全"></a>3.3  变量的线程安全</h3><p><strong>成员变量和静态变量是否线程安全</strong>？</p>
+<ul>
+<li>  如果没有共享，则是安全的。</li>
+<li>  如果只有读没有写则安全，如果有写则这段代码是临界区，需要考虑安全。</li>
+</ul>
+<p><strong>局部变量是否线程安全</strong>?</p>
+<ul>
+<li>  是线程安全的</li>
+<li>  但局部变量引用的对象则未必，如果该对象没有逃离方法的作用访问，它是线程安全的，如果该对象逃离方法的作用范围，需要考虑线程安全</li>
+</ul>
+<p><strong>常见线程安全类：</strong></p>
+<ul>
+<li>  String</li>
+<li>  Integer</li>
+<li>  StringBuffer</li>
+<li>  Random</li>
+<li>  Vector</li>
+<li>  Hashtable</li>
+<li>  java.util.concurrent 包下的类</li>
+</ul>
+<p><strong>注意：但</strong>注意<strong>它们多个方法的组合不是原子的</strong></p>
+<h3 id="3-4-Monitor"><a href="#3-4-Monitor" class="headerlink" title="3.4 Monitor"></a>3.4 Monitor</h3><p>Monitor 被翻译为<strong>监视器</strong>或<strong>管程</strong>，每个 Java 对象都可以关联一个 Monitor 对象，如果使用 synchronized 给对象上锁（重量级）之后，该对象头的Mark Word 中就被设置指向 Monitor 对象的指针</p>
+<p><img src="/../images/image-20240219164656074.png" srcset="/img/loading.gif" lazyload alt="image-20240219164656074"></p>
+<ul>
+<li>  刚开始 Monitor 中 Owner 为 null</li>
+<li>  当 Thread-2 执行 synchronized(obj) 就会将 Monitor 的所有者 Owner 置为 Thread-2，Monitor中只能有一个 Owner</li>
+<li>  在 Thread-2 上锁的过程中，如果 Thread-3，Thread-4，Thread-5 也来执行 synchronized(obj)，就会进入EntryList BLOCKED</li>
+<li>  Thread-2 执行完同步代码块的内容，然后唤醒 EntryList 中等待的线程来竞争锁，竞争的时是非公平的</li>
+<li>  图中 WaitSet 中的 Thread-0，Thread-1 是之前获得过锁，但条件不满足进入 WAITING 状态的线程，后面讲wait-notify 时会分析</li>
+</ul>
+<h3 id="3-5-synchronized-原理"><a href="#3-5-synchronized-原理" class="headerlink" title="3.5 synchronized 原理"></a>3.5 <strong>synchronized</strong> <strong>原理</strong></h3><h4 id="3-5-1-轻量级锁"><a href="#3-5-1-轻量级锁" class="headerlink" title="3.5.1 轻量级锁"></a>3.5.1 轻量级锁</h4><p>如果一个对象有多线程要加锁，但是加锁的时间是错开的（没有竞争），那么可以使用轻量级锁。关键字并没有改变，还是synchronized。</p>
+<p>轻量级锁过程：</p>
+<ul>
+<li><p>  创建锁对象：每个线程都会有对应的锁记录对象，内部可以存储锁定对象的Mark Word。</p>
+</li>
+<li><p>让锁记录中Object reference 指向锁对象，并且尝试用cas替换Object中的Mark Word，将Mark Word的值存入锁记录中。</p>
+<p>  <img src="/../images/image-20240220101311772.png" srcset="/img/loading.gif" lazyload alt="image-20240220101311772"></p>
+</li>
+<li><p>如果cas替换成功，对象头中存储了锁记录的地址和状态00，表示该线程给对象加锁。</p>
+<p>  <img src="/../images/image-20240220101412522.png" srcset="/img/loading.gif" lazyload alt="image-20240220101412522"></p>
+</li>
+<li><p>如果 cas 失败，有两种情况</p>
+<ul>
+<li>  如果是其它线程已经持有了该 Object 的轻量级锁，这时表明有竞争，进入锁膨胀过程</li>
+<li>  如果是自己执行了 synchronized 锁重入，那么再添加一条 Lock Record 作为重入的计数</li>
+</ul>
+<p>  <img src="/../images/image-20240220101614632.png" srcset="/img/loading.gif" lazyload alt="image-20240220101614632"></p>
+</li>
+<li><p>  当退出 synchronized 代码块（解锁时）如果有取值为 null 的锁记录，表示有重入，这时重置锁记录，表示重入计数减一</p>
+</li>
+<li><p>  当退出 synchronized 代码块（解锁时）锁记录的值不为 null，这时使用 cas 将 Mark Word 的值恢复给对象头;成功，则解锁成功；失败，说明轻量级锁进行了锁膨胀或已经升级为重量级锁，进入重量级锁解锁流程</p>
+</li>
+</ul>
+<h4 id="3-5-2-锁膨胀"><a href="#3-5-2-锁膨胀" class="headerlink" title="3.5.2 锁膨胀"></a>3.5.2 锁膨胀</h4><ul>
+<li>   Thread-1 加轻量级锁失败，进入锁膨胀流程</li>
+</ul>
+<pre><code class="hljs">-   即为 Object 对象申请 Monitor 锁，让 Object 指向重量级锁地址（重量锁标志为10）
+-   然后自己进入 Monitor 的 EntryList BLOCKED
+
+![image-20240220102130510](../images/image-20240220102130510.png)
+</code></pre>
+<ul>
+<li>  当 Thread-0 退出同步块解锁时，使用 cas 将 Mark Word 的值恢复给对象头，失败。这时会进入重量级解锁流程，即按照 Monitor 地址找到 Monitor 对象，设置 Owner 为 null，唤醒 EntryList 中 BLOCKED 线程</li>
+<li>  总结：轻量级锁不开启monitor，而是直接mark word绑定锁记录，而当有其他线程抢占锁的时候，启动锁膨胀机制，将线程绑定在Monitor中，每个对象都是有一个Monitor，其中EntryList中是等待中的线程，Owner是当前线程。</li>
+</ul>
+<h4 id="3-5-3-自旋优化"><a href="#3-5-3-自旋优化" class="headerlink" title="3.5.3 自旋优化"></a>3.5.3 自旋优化</h4><p>重量级锁竞争的时候，还可以使用自旋来进行优化，如果当前线程自旋成功功（即这时候持锁线程已经退出了同步块，释放了锁）这时当前线程就可以避免阻塞。</p>
+<ul>
+<li>  自旋会占用 CPU 时间，单核 CPU 自旋就是浪费，多核 CPU 自旋才能发挥优势。</li>
+<li>  在 Java 6 之后自旋锁是自适应的，比如对象刚刚的一次自旋操作成功过，那么认为这次自旋成功的可能性会高，就多自旋几次；反之，就少自旋甚至不自旋，总之，比较智能。</li>
+<li>  Java 7 之后不能控制是否开启自旋功能</li>
+</ul>
+<h4 id="3-5-4-偏向锁"><a href="#3-5-4-偏向锁" class="headerlink" title="3.5.4 偏向锁"></a>3.5.4 偏向锁</h4><p>轻量级锁在没有竞争时（就自己这个线程），每次重入仍然需要执行 CAS 操作。偏向锁可以解决只有第一次使用 CAS 将线程 ID 设置到对象的 Mark Word 头，之后发现这个线程 ID 是自己的就表示没有竞争，不用重新 CAS。</p>
+<p><img src="/../images/image-20240220103859689.png" srcset="/img/loading.gif" lazyload alt="image-20240220103859689"></p>
+<p><img src="/../images/image-20240220103906771.png" srcset="/img/loading.gif" lazyload alt="image-20240220103906771"></p>
+<h5 id="3-5-4-1-偏向状态"><a href="#3-5-4-1-偏向状态" class="headerlink" title="3.5.4.1 偏向状态"></a>3.5.4.1 偏向状态</h5><ul>
+<li>  如果开启了偏向锁（默认开启），那么对象创建后，markword 值为 0x05 即最后 3 位为 101，这时它的thread、epoch、age 都为 0</li>
+<li>  偏向锁是默认是延迟的，不会在程序启动时立即生效，如果想避免延迟，可以加 VM 参数 -XX:BiasedLockingStartupDelay=0 来禁用延迟</li>
+<li>  如果没有开启偏向锁，那么对象创建后，markword 值为 0x01 即最后 3 位为 001，这时它的 hashcode、age 都为 0，第一次用到 hashcode 时才会赋值</li>
+</ul>
+<p><strong>处于偏向锁的对象解锁后，线程 id 仍存储于对象头中</strong></p>
+<h5 id="3-5-4-2-撤销-调用对象-hashCode"><a href="#3-5-4-2-撤销-调用对象-hashCode" class="headerlink" title="3.5.4.2 撤销 - 调用对象 hashCode"></a>3.5.4.2 <strong>撤销</strong> <strong>-</strong> <strong>调用对象</strong> <strong>hashCode</strong></h5><p>调用了对象的 hashCode，但偏向锁的对象 MarkWord 中存储的是线程 id，如果调用 hashCode 会导致偏向锁被撤销</p>
+<ul>
+<li>  轻量级锁会在锁记录中记录 hashCode</li>
+<li>  重量级锁会在 Monitor 中记录 hashCode</li>
+</ul>
+<h5 id="3-5-4-3-撤销-其它线程使用对象"><a href="#3-5-4-3-撤销-其它线程使用对象" class="headerlink" title="3.5.4.3 撤销 - 其它线程使用对象"></a>3.5.4.3 <strong>撤销</strong> <strong>-</strong> <strong>其它线程使用对象</strong></h5><p>当有其它线程使用偏向锁对象时，会将偏向锁升级为轻量级锁</p>
+<h3 id="3-6-wait-notify"><a href="#3-6-wait-notify" class="headerlink" title="3.6 wait notify"></a>3.6 wait notify</h3><ul>
+<li>  obj.wait() 让进入 object 监视器的线程到 waitSet 等待</li>
+<li>  obj.notify() 在 object 上正在 waitSet 等待的线程中挑一个唤醒</li>
+<li>  obj.notifyAll() 让 object 上正在 waitSet 等待的线程全部唤醒</li>
+<li>  wait() 方法会释放对象的锁，进入 WaitSet 等待区，从而让其他线程就机会获取对象的锁。无限制等待，直到notify 为止</li>
+<li>  wait(long n) 有时限的等待, 到 n 毫秒后结束等待，或是被 notify</li>
+</ul>
+<h3 id="3-7-Park-amp-amp-UnPark"><a href="#3-7-Park-amp-amp-UnPark" class="headerlink" title="3.7 Park&amp;&amp;UnPark"></a>3.7 Park&amp;&amp;UnPark</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 暂停当前线程</span><br>LockSupport.park(); <br><span class="hljs-comment">// 恢复某个线程的运行</span><br>LockSupport.unpark(暂停线程对象)<br></code></pre></td></tr></table></figure>
+
+<p><strong>特点：</strong></p>
+<ul>
+<li>  wait，notify 和 notifyAll 必须配合 Object Monitor 一起使用，而 park，unpark 不必</li>
+<li>  park &amp; unpark 是以线程为单位来【阻塞】和【唤醒】线程，而 notify 只能随机唤醒一个等待线程，notifyAll 是唤醒所有等待线程，就不那么【精确】。</li>
+<li>  park &amp; unpark 可以先 unpark，而 wait &amp; notify 不能先 notify</li>
+</ul>
+<h3 id="3-8-线程状态转换"><a href="#3-8-线程状态转换" class="headerlink" title="3.8 线程状态转换"></a>3.8 线程状态转换</h3><p><img src="/../images/image-20240220110215342.png" srcset="/img/loading.gif" lazyload alt="image-20240220110215342"></p>
+<p><img src="/../images/image-20240220110721207.png" srcset="/img/loading.gif" lazyload alt="image-20240220110721207"><img src="/../images/image-20240220110730235.png" srcset="/img/loading.gif" lazyload alt="image-20240220110730235"><img src="/../images/image-20240220110747417.png" srcset="/img/loading.gif" lazyload alt="image-20240220110747417"><img src="/../images/image-20240220110800928.png" srcset="/img/loading.gif" lazyload alt="image-20240220110800928"></p>
+<p>总结：</p>
+<ul>
+<li>  从RUNNABLE到WAITING有wait、join、park方法。</li>
+<li>  RUNNABLE到TIMED_WAITING是要用synchronized获取对象锁之后，调用wait或用sleep或.parkNanos</li>
+</ul>
+<h3 id="3-9-多把锁"><a href="#3-9-多把锁" class="headerlink" title="3.9 多把锁"></a>3.9 多把锁</h3><p>一个对象有两个功能，这两个功能之间不相干，但是只有一把对象锁，这时候就需要准备多把对象锁。</p>
+<p>将锁进行细分：</p>
+<ul>
+<li>  好处是提高并发度</li>
+<li>  坏处是一个线程要多个锁，会造成死锁。</li>
+</ul>
+<h3 id="3-10-活跃度"><a href="#3-10-活跃度" class="headerlink" title="3.10 活跃度"></a>3.10 活跃度</h3><h4 id="3-10-1-死锁"><a href="#3-10-1-死锁" class="headerlink" title="3.10.1 死锁"></a>3.10.1 死锁</h4><p>情景：线程t1获取了A对象的锁，想要获取B对象的锁，t2获取了B对象的锁，此时想要获取A对象的锁。</p>
+<p>定位死锁可以使用jconsole工具，或者用jps定位进程id，再用jstack定位死锁。</p>
+<ul>
+<li>  避免死锁要注意加锁顺序</li>
+<li>  另外如果由于某个线程进入了死循环，导致其它线程一直等待，对于这种情况 linux 下可以通过 top 先定位到CPU 占用高的 Java 进程，再利用 top -Hp 进程id 来定位是哪个线程，最后再用 jstack 排查</li>
+</ul>
+<h4 id="3-10-2-活锁"><a href="#3-10-2-活锁" class="headerlink" title="3.10.2 活锁"></a>3.10.2 活锁</h4><p>活锁出现在两个线程互相改变对方的结束条件，最后谁也无法结束</p>
+<h4 id="3-10-3-饥饿"><a href="#3-10-3-饥饿" class="headerlink" title="3.10.3 饥饿"></a>3.10.3 饥饿</h4><p>一个线程由于优先级太低，始终得不到 CPU 调度执行，也不能够结束，饥饿的情况不易演示，讲读写锁时会涉及饥饿问题</p>
+<h3 id="3-11-ReentrantLock"><a href="#3-11-ReentrantLock" class="headerlink" title="3.11 ReentrantLock"></a>3.11 <strong>ReentrantLock</strong></h3><p>相对于 synchronized 它具备如下特点：</p>
+<ul>
+<li>  可中断</li>
+<li>  可以设置超时时间</li>
+<li>  可以设置为公平锁</li>
+<li>  支持多个条件变量</li>
+<li>  都支持可重入</li>
+</ul>
+<p><strong>可重入：</strong></p>
+<p>可重入指的是用一个线程如果首次获得了锁，那么可以再次获得锁。</p>
+<p><strong>可打断：</strong></p>
+<p>顾名思义</p>
+<p><strong>锁超时</strong></p>
+<p><strong>公平锁</strong></p>
+<p>默认不公平</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">ReentrantLock <span class="hljs-keyword">lock</span> = <span class="hljs-keyword">new</span> ReentrantLock(<span class="hljs-literal">true</span>);<span class="hljs-comment">//开启公平锁。</span><br></code></pre></td></tr></table></figure>
+
+<p>公平锁一般没有必要，会降低并发度，后面分析原理时会讲解</p>
+<p><strong>条件变量：</strong></p>
+<p>synchronized 中也有条件变量，就是我们讲原理时那个 waitSet 休息室，当条件不满足时进入 waitSet 等待</p>
+<p>ReentrantLock 的条件变量比 synchronized 强大之处在于，它是支持多个条件变量的，这就好比</p>
+<ul>
+<li><p>  synchronized 是那些不满足条件的线程都在一间休息室等消息</p>
+</li>
+<li><p>  而 ReentrantLock 支持多间休息室，有专门等烟的休息室、专门等早餐的休息室、唤醒时也是按休息室来唤醒</p>
+</li>
+<li><p>  await 前需要获得锁</p>
+</li>
+<li><p>  await 执行后，会释放锁，进入 conditionObject 等待</p>
+</li>
+<li><p>  await 的线程被唤醒（或打断、或超时）取重新竞争 lock 锁</p>
+</li>
+<li><p>  竞争 lock 锁成功后，从 await 后继续执行</p>
+</li>
+</ul>
+<h2 id="4-共享模型——内存"><a href="#4-共享模型——内存" class="headerlink" title="4 共享模型——内存"></a>4 共享模型——内存</h2><p>共享变量在多线程间的【可见性】问题与多条指令执行时的【有序性】问题</p>
+<h3 id="4-1-Java内存模型"><a href="#4-1-Java内存模型" class="headerlink" title="4.1 Java内存模型"></a>4.1 Java内存模型</h3><p>JMM 即 Java Memory Model。</p>
+<ul>
+<li>  原子性 - 保证指令不会受到线程上下文切换的影响</li>
+<li>  可见性 - 保证指令不会受 cpu 缓存的影响</li>
+<li>  有序性 - 保证指令不会受 cpu 指令并行优化的影响</li>
+</ul>
+<h3 id="4-2-可见性"><a href="#4-2-可见性" class="headerlink" title="4.2 可见性"></a>4.2 可见性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">run</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br> <span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(()-&gt;&#123;<br> <span class="hljs-keyword">while</span>(run)&#123;<br> <span class="hljs-comment">// ....</span><br> &#125;<br> &#125;);<br> t.start();<br> sleep(<span class="hljs-number">1</span>);<br> run = <span class="hljs-literal">false</span>; <span class="hljs-comment">// 线程t不会如预想的停下来</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20240220113657951.png" srcset="/img/loading.gif" lazyload alt="image-20240220113657951"></p>
+<p>说说上面的程序为什么没有停止：</p>
+<p>首先t线程初始的时候从主存中读取run的值，JIT编译器会将run缓存到自己的高速缓存中，如果要对让线程直接读取主存中的run值，可以用volatile关键字，可以直接对主存中的变量进行操作。</p>
+<p><strong>注意</strong> synchronized 语句块既可以保证代码块的原子性，也同时保证代码块内变量的可见性。但缺点synchronized 是属于重量级操作，性能相对更低</p>
+<h3 id="4-3-有序性"><a href="#4-3-有序性" class="headerlink" title="4.3 有序性"></a>4.3 有序性</h3><p>JVM 会在不影响正确性的前提下，可以调整语句的执行顺序。这种特性称之为『指令重排』，多线程下『指令重排』会影响正确性。</p>
+<p>volatile 修饰的变量，可以禁用指令重排</p>
+<p><strong>happens-before</strong></p>
+<p>规定了对共享变量的写操作对其它线程的读操作可见</p>
+<h2 id="5-共享模型——无锁"><a href="#5-共享模型——无锁" class="headerlink" title="5 共享模型——无锁"></a>5 共享模型——无锁</h2><ul>
+<li>  CAS 与 volatile</li>
+<li>  原子整数</li>
+<li>  原子引用</li>
+<li>  原子累加器</li>
+<li>  Unsafe</li>
+</ul>
+<h3 id="5-1-无锁解决锁问题"><a href="#5-1-无锁解决锁问题" class="headerlink" title="5.1 无锁解决锁问题"></a>5.1 无锁解决锁问题</h3><p><strong>有锁的解决方式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span>   <span class="hljs-title class_">AccountUnsafe</span> <span class="hljs-keyword">implements</span>  <span class="hljs-title class_">Account</span>&#123;<br><br>    <span class="hljs-keyword">private</span> Integer balance;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AccountUnsafe</span><span class="hljs-params">(Integer balance)</span> &#123;<br>        <span class="hljs-built_in">this</span>.balance = balance;<br>    &#125;<br><br>    <span class="hljs-comment">//synchronized加锁，对象锁，如果有竞争，自动重量级锁。原理是锁对象，每个线程需要等到上面一个线程解锁以后才可以获取当前对象的锁。</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span>  Integer <span class="hljs-title function_">getBalance</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> balance;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span>  <span class="hljs-keyword">void</span> <span class="hljs-title function_">withdraw</span><span class="hljs-params">(Integer amount)</span> &#123;<br>        balance-=amount;<br>    &#125;<br><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        Account.demo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">AccountUnsafe</span>(<span class="hljs-number">10000</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>不需要在意接口。只需要知道到没有加synchronized之前会产生多喝线程同时竞争一个对象。</p>
+<p><strong>无锁解决：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AccountSafe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Account</span> &#123;<br>    <span class="hljs-keyword">private</span> AtomicInteger balance;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AccountSafe</span><span class="hljs-params">(Integer balance)</span> &#123;<br>        <span class="hljs-built_in">this</span>.balance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(balance);<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">getBalance</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> balance.get();<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">withdraw</span><span class="hljs-params">(Integer amount)</span> &#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> balance.get();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> prev - amount;<br>            <span class="hljs-keyword">if</span> (balance.compareAndSet(prev, next)) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 可以简化为下面的方法</span><br>        <span class="hljs-comment">// balance.addAndGet(-1 * amount);</span><br>    &#125;<br><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        Account.demo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">AccountSafe</span>(<span class="hljs-number">10000</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到上面是使用了一个AtomicInteger的解决方法，内部没有锁来保证共享变量的线程安全，是如何实现？</p>
+<ul>
+<li><p><strong>compareAndSet</strong> 正是做这个检查，在 set 前，先比较 prev 与当前值</p>
+<p>   - 不一致了，next 作废，返回 false 表示失败</p>
+<p>   比如，别的线程已经做了减法，当前值已经被减成了 990</p>
+<p>   那么本线程的这次 990 就作废了，进入 while 下次循环重试</p>
+<p>   - 一致，以 next 设置为新值，返回 true 表示成功</p>
+</li>
+</ul>
+<p>这个思路在做redis分布式锁的时候会经常用到。</p>
+<h3 id="5-2-CAS和volatile"><a href="#5-2-CAS和volatile" class="headerlink" title="5.2 CAS和volatile"></a>5.2 CAS和volatile</h3><p>其中的关键是 compareAndSet，它的简称就是 CAS （也有 Compare And Swap 的说法），它必须是原子操作。</p>
+<blockquote>
+<p>  其实 CAS 的底层是 lock cmpxchg 指令（X86 架构），在单核 CPU 和多核 CPU 下都能够保证【比较-交换】的原子性。</p>
+<p>  在多核状态下，某个核执行到带 lock 的指令时，CPU 会让总线锁住，当这个核把此指令执行完毕，再开启总线。这个过程中不会被线程的调度机制所打断，保证了多个线程对内存操作的准确性，是原子的。</p>
+</blockquote>
+<p><strong>volatile</strong></p>
+<p>获取共享变量时，为了保证该变量的可见性，需要使用 volatile 修饰。上面我们讲过volatile的用法，也就是线程直接操作主存。CAS 必须借助 volatile 才能读取到共享变量的最新值来实现【比较并交换】的效果</p>
+<p><strong>无锁效率高的原因：</strong></p>
+<ul>
+<li>  无锁情况下，即使重试失败，线程始终在高速运行，没有停歇，而 synchronized 会让线程在没有获得锁的时候，发生上下文切换，进入阻塞。打个比喻</li>
+<li>  线程就好像高速跑道上的赛车，高速运行时，速度超快，一旦发生上下文切换，就好比赛车要减速、熄火，等被唤醒又得重新打火、启动、加速… 恢复到高速运行，代价比较大</li>
+<li>  但无锁情况下，因为线程要保持运行，需要额外 CPU 的支持，CPU 在这里就好比高速跑道，没有额外的跑道，线程想高速运行也无从谈起，虽然不会进入阻塞，但由于没有分到时间片，仍然会进入可运行状态，还是会导致上下文切换</li>
+</ul>
+<p>结合 CAS 和 volatile 可以实现无锁并发，适用于线程数少、多核 CPU 的场景下。</p>
+<ul>
+<li>  CAS基于乐观锁的思想：不怕别的线程来改变量，就算改了，在重试就好了。</li>
+<li>  synchronized 是基于悲观锁的思想：最悲观的估计，得防着其它线程来修改共享变量，我上了锁你们都别想改，我改完了解开锁，你们才有机会。</li>
+<li>  但是CAS也是存在问题的，如果竞争激烈，重试过多必定会影响效率。</li>
+</ul>
+<h3 id="5-3-原子整数"><a href="#5-3-原子整数" class="headerlink" title="5.3 原子整数"></a>5.3 原子整数</h3><p>JUC并发包提供了：</p>
+<ul>
+<li>  AtomicBoolean</li>
+<li>  AtomicInteger</li>
+<li>  AtomicLong</li>
+</ul>
+<p><strong>常见操作：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);<br><span class="hljs-comment">// 获取并自增（i = 0, 结果 i = 1, 返回 0），类似于 i++</span><br>System.out.println(i.getAndIncrement());<br><span class="hljs-comment">// 自增并获取（i = 1, 结果 i = 2, 返回 2），类似于 ++i</span><br>System.out.println(i.incrementAndGet());<br><span class="hljs-comment">// 自减并获取（i = 2, 结果 i = 1, 返回 1），类似于 --i</span><br>System.out.println(i.decrementAndGet());<br><span class="hljs-comment">// 获取并自减（i = 1, 结果 i = 0, 返回 1），类似于 i--</span><br>System.out.println(i.getAndDecrement());<br><span class="hljs-comment">// 获取并加值（i = 0, 结果 i = 5, 返回 0）</span><br>System.out.println(i.getAndAdd(<span class="hljs-number">5</span>));<br><span class="hljs-comment">// 加值并获取（i = 5, 结果 i = 0, 返回 0）</span><br>System.out.println(i.addAndGet(-<span class="hljs-number">5</span>));<br><span class="hljs-comment">// 获取并更新（i = 0, p 为 i 的当前值, 结果 i = -2, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.getAndUpdate(p -&gt; p - <span class="hljs-number">2</span>));<br><span class="hljs-comment">// 更新并获取（i = -2, p 为 i 的当前值, 结果 i = 0, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.updateAndGet(p -&gt; p + <span class="hljs-number">2</span>));<br><span class="hljs-comment">// 获取并计算（i = 0, p 为 i 的当前值, x 为参数1, 结果 i = 10, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br><span class="hljs-comment">// getAndUpdate 如果在 lambda 中引用了外部的局部变量，要保证该局部变量是 final 的</span><br><span class="hljs-comment">// getAndAccumulate 可以通过 参数1 来引用外部的局部变量，但因为其不在 lambda 中因此不必是 final</span><br>System.out.println(i.getAndAccumulate(<span class="hljs-number">10</span>, (p, x) -&gt; p + x));<br><span class="hljs-comment">// 计算并获取（i = 10, p 为 i 的当前值, x 为参数1, 结果 i = 0, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.accumulateAndGet(-<span class="hljs-number">10</span>, (p, x) -&gt; p + x));<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-4-原子引用"><a href="#5-4-原子引用" class="headerlink" title="5.4 原子引用"></a>5.4 <strong>原子引用</strong></h3><ul>
+<li>  AtomicReference</li>
+<li>  AtomicMarkableReference</li>
+<li>  AtomicStampedReference</li>
+</ul>
+<p><strong>使用:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DecimalAccountSafeCas</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">DecimalAccount</span> &#123;<br> 	AtomicReference&lt;BigDecimal&gt; ref;<br> 	<span class="hljs-keyword">public</span> <span class="hljs-title function_">DecimalAccountSafeCas</span><span class="hljs-params">(BigDecimal balance)</span> &#123;<br> 		ref = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicReference</span>&lt;&gt;(balance);<br>	&#125;<br>	<span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> BigDecimal <span class="hljs-title function_">getBalance</span><span class="hljs-params">()</span> &#123;<br> 		<span class="hljs-keyword">return</span> ref.get();<br> &#125;<br> <span class="hljs-meta">@Override</span><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">withdraw</span><span class="hljs-params">(BigDecimal amount)</span> &#123;<br> 	<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br> 		<span class="hljs-type">BigDecimal</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> ref.get();<br> 		<span class="hljs-type">BigDecimal</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> prev.subtract(amount);<br> 		<span class="hljs-keyword">if</span> (ref.compareAndSet(prev, next)) &#123;<br> 			<span class="hljs-keyword">break</span>;<br> 			&#125;<br> 		&#125;<br> 	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>主线程仅能判断出共享变量的值与最初值 A 是否相同，不能感知到这种从 A 改为 B 又 改回 A 的情况，如果主线程希望：</p>
+<p>只要有其它线程【动过了】共享变量，那么自己的 cas 就算失败，这时，仅比较值是不够的，需要再加一个版本号</p>
+<p><strong>AtomicStampedReference</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> AtomicStampedReference&lt;String&gt; ref = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicStampedReference</span>&lt;&gt;(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">0</span>);<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br> log.debug(<span class="hljs-string">&quot;main start...&quot;</span>);<br> <span class="hljs-comment">// 获取值 A</span><br> <span class="hljs-type">String</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> ref.getReference();<br> <span class="hljs-comment">// 获取版本号</span><br> <span class="hljs-type">int</span> <span class="hljs-variable">stamp</span> <span class="hljs-operator">=</span> ref.getStamp();<br> log.debug(<span class="hljs-string">&quot;版本 &#123;&#125;&quot;</span>, stamp);<br> <span class="hljs-comment">// 如果中间有其它线程干扰，发生了 ABA 现象</span><br> other();<br> sleep(<span class="hljs-number">1</span>);<br> <span class="hljs-comment">// 尝试改为 C</span><br> log.debug(<span class="hljs-string">&quot;change A-&gt;C &#123;&#125;&quot;</span>, ref.compareAndSet(prev, <span class="hljs-string">&quot;C&quot;</span>, stamp, stamp + <span class="hljs-number">1</span>));<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">other</span><span class="hljs-params">()</span> &#123;<br> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br> log.debug(<span class="hljs-string">&quot;change A-&gt;B &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="hljs-string">&quot;B&quot;</span>, <br> ref.getStamp(), ref.getStamp() + <span class="hljs-number">1</span>));<br> log.debug(<span class="hljs-string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());<br> &#125;, <span class="hljs-string">&quot;t1&quot;</span>).start();<br> sleep(<span class="hljs-number">0.5</span>);<br> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br> log.debug(<span class="hljs-string">&quot;change B-&gt;A &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="hljs-string">&quot;A&quot;</span>, <br> ref.getStamp(), ref.getStamp() + <span class="hljs-number">1</span>));<br> log.debug(<span class="hljs-string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());<br> &#125;, <span class="hljs-string">&quot;t2&quot;</span>).start();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>AtomicMarkableReference</strong></p>
+<p>不关心修改了几次，只是关心有没有修改。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestABAAtomicMarkableReference</span> &#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br> <span class="hljs-type">GarbageBag</span> <span class="hljs-variable">bag</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GarbageBag</span>(<span class="hljs-string">&quot;装满了垃圾&quot;</span>);<br> <span class="hljs-comment">// 参数2 mark 可以看作一个标记，表示垃圾袋满了</span><br> AtomicMarkableReference&lt;GarbageBag&gt; ref = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicMarkableReference</span>&lt;&gt;(bag, <span class="hljs-literal">true</span>);<br> log.debug(<span class="hljs-string">&quot;主线程 start...&quot;</span>);<br> <span class="hljs-type">GarbageBag</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> ref.getReference();<br> log.debug(prev.toString());<br> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br> log.debug(<span class="hljs-string">&quot;打扫卫生的线程 start...&quot;</span>);<br> bag.setDesc(<span class="hljs-string">&quot;空垃圾袋&quot;</span>);<br> <span class="hljs-keyword">while</span> (!ref.compareAndSet(bag, bag, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>)) &#123;&#125;<br> log.debug(bag.toString());<br> &#125;).start();<br> Thread.sleep(<span class="hljs-number">1000</span>);<br> log.debug(<span class="hljs-string">&quot;主线程想换一只新垃圾袋？&quot;</span>);<br> <span class="hljs-type">boolean</span> <span class="hljs-variable">success</span> <span class="hljs-operator">=</span> ref.compareAndSet(prev, <span class="hljs-keyword">new</span> <span class="hljs-title class_">GarbageBag</span>(<span class="hljs-string">&quot;空垃圾袋&quot;</span>), <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);<br> log.debug(<span class="hljs-string">&quot;换了么？&quot;</span> + success);<br> log.debug(ref.getReference().toString());<br> &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-5-原子数组"><a href="#5-5-原子数组" class="headerlink" title="5.5 原子数组"></a>5.5 <strong>原子数组</strong></h3><ul>
+<li>  AtomicIntegerArray</li>
+<li>  AtomicLongArray</li>
+<li>  AtomicReferenceArray</li>
+</ul>
+<h3 id="5-6-字段更新器"><a href="#5-6-字段更新器" class="headerlink" title="5.6 字段更新器"></a>5.6 <strong>字段更新器</strong></h3><ul>
+<li>  AtomicReferenceFieldUpdater // 域 字段</li>
+<li>  AtomicIntegerFieldUpdater</li>
+<li>  AtomicLongFieldUpdater</li>
+</ul>
+<p>利用字段更新器，可以针对对象的某个域（Field）进行原子操作，只能配合 volatile 修饰的字段使用，否则会出现异常</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9D%A2%E8%AF%95/" class="category-chain-item">面试</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B9%B6%E5%8F%91%E9%9D%A2%E8%AF%95%E9%A2%98/">#并发面试题</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>并发编程面试题</div>
+      <div>http://example.com/2024/02/19/并发编程面试题/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Peter Xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/20/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" title="栈与队列">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">栈与队列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/19/%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="字符串">
+                        <span class="hidden-mobile">字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

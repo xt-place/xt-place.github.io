@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="XT-CODE-WORLD">
 <meta property="og:description" content="GDT和LDT从前面的操作系统加载过程中我们知道了操作系统在加载中会改变寻址方式，也就是实模式和保护模式下的寻址方式的改变。 下面我们就通过寻址方式展开说一下背后的原理以及GDT和LDT的工作内容。 内存寻址实模式下的内存寻址实模式下的内存寻址就是如下的公式：    段首地址*16+偏移地址&#x3D;物理地址  因为在8086CPU内部有20条地址线，但是寄存器的大小都是16位的，也就是寻址范围是64KB">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/5021220a0a4241c59c7c94f41eb29dc7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200101200022770.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/13d1a9632c714a3ca1e96c1e07e937b9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200101203309645.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200101203425902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="http://example.com/images/5021220a0a4241c59c7c94f41eb29dc7.png">
+<meta property="og:image" content="http://example.com/images/20200101200022770.png">
+<meta property="og:image" content="http://example.com/images/13d1a9632c714a3ca1e96c1e07e937b9.png">
+<meta property="og:image" content="http://example.com/images/20200101203309645.png">
+<meta property="og:image" content="http://example.com/images/20200101203425902.png">
 <meta property="article:published_time" content="2024-02-01T00:53:10.000Z">
-<meta property="article:modified_time" content="2024-02-01T01:00:14.099Z">
+<meta property="article:modified_time" content="2024-02-06T16:14:59.587Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/5021220a0a4241c59c7c94f41eb29dc7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70#pic_center">
+<meta name="twitter:image" content="http://example.com/images/5021220a0a4241c59c7c94f41eb29dc7.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -318,7 +318,7 @@
 </blockquote>
 <h2 id="什么是GDT"><a href="#什么是GDT" class="headerlink" title="什么是GDT"></a>什么是GDT</h2><p>上面我们只是浅浅的说了一下什么是GDT，现在我们深入了解一下。</p>
 <p>GDT称为全局描述符表，只有一张且全局可见，存放在内存中的任何地方</p>
-<p><img src="https://img-blog.csdnimg.cn/5021220a0a4241c59c7c94f41eb29dc7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="图2.1 段描述符"></p>
+<p><img src="/../images/5021220a0a4241c59c7c94f41eb29dc7.png" srcset="/img/loading.gif" lazyload alt="图2.1 段描述符"></p>
 <p>看到上面的这幅图一定非常的😵。下面我解读一下：</p>
 <ul>
 <li>  G：颗粒度。当G=0时，段限长的20位为实际段限长，最大限长为2^20=1MB；当G=1时，实际段限长为20位段限长乘以2^12=4KB，最大限长达到4GB。</li>
@@ -327,12 +327,12 @@
 </ul>
 <h2 id="GDT在哪"><a href="#GDT在哪" class="headerlink" title="GDT在哪"></a>GDT在哪</h2><p>GDT存放在内存中，但是我们怎么找到它呢？</p>
 <p>当然是有一个入口去记录GDT的地址，那么这个入口就是一个叫做GDTR的寄存器（48bits）来存放入口地址。下面是GDTR的结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200101200022770.png#pic_center" srcset="/img/loading.gif" lazyload alt="图3.1 GDT结构图"></p>
+<p><img src="/../images/20200101200022770.png" srcset="/img/loading.gif" lazyload alt="图3.1 GDT结构图"></p>
 <p>指令LGDT和SGDT分别用于加载和保存GDTR寄存器的内容。</p>
 <h2 id="什么是LDT"><a href="#什么是LDT" class="headerlink" title="什么是LDT"></a>什么是LDT</h2><p>LDT是局部段描述符表，和GDT的结构相似。</p>
 <p>在内存中可以有好多个LDT，但是在一个任务中最多只有一个LDT，并且每个LDT又是当作一个段记录在GDT中。</p>
 <p>如果每个任务都有LDT那么切换任务时就需要修改LDTR，修改的方式就是通过LLDT指令将下一个任务的LDT的段描述符的段选择子装入此寄存器。</p>
-<p><img src="https://img-blog.csdnimg.cn/13d1a9632c714a3ca1e96c1e07e937b9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="图4.1 Linux0.11中的 GDT 和 LDT"></p>
+<p><img src="/../images/13d1a9632c714a3ca1e96c1e07e937b9.png" srcset="/img/loading.gif" lazyload alt="图4.1 Linux0.11中的 GDT 和 LDT"></p>
 <h2 id="段选择子"><a href="#段选择子" class="headerlink" title="段选择子"></a>段选择子</h2><p>段选择子就是原来的各个段寄存器，但是并不是每一个段选择子都是段寄存器，而是根据汇编语言来控制的，例如jmpi 0 8。就是利用常数表示选择子。</p>
 <p>段选择子大小为 16bit。段选择子包括三部分：描述符索引（index）、TI、请求特权级（RPL）。其中index占13位、TI占1位、RPL占2位。</p>
 <ul>
@@ -341,8 +341,8 @@
 <li><p>  请求特权级（RPL）则代表选择子的特权级，共有4个特权级（0级、1级、2级、3级）。</p>
 </li>
 </ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="访问-GDT"><a href="#访问-GDT" class="headerlink" title="访问 GDT"></a>访问 GDT</h3><p><img src="https://img-blog.csdnimg.cn/20200101203309645.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="图6.1 通过访问 GDT 寻址"></p>
-<h3 id="访问-LDT"><a href="#访问-LDT" class="headerlink" title="访问 LDT"></a>访问 LDT</h3><p><img src="https://img-blog.csdnimg.cn/20200101203425902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwOTA5Mg==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="图6.2 通过访问 LDT 寻址"></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="访问-GDT"><a href="#访问-GDT" class="headerlink" title="访问 GDT"></a>访问 GDT</h3><p><img src="/../images/20200101203309645.png" srcset="/img/loading.gif" lazyload alt="图6.1 通过访问 GDT 寻址"></p>
+<h3 id="访问-LDT"><a href="#访问-LDT" class="headerlink" title="访问 LDT"></a>访问 LDT</h3><p><img src="/../images/20200101203425902.png" srcset="/img/loading.gif" lazyload alt="图6.2 通过访问 LDT 寻址"></p>
 
                 
               </div>

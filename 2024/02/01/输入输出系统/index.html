@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/image-20230314134140015.png">
 <meta property="og:image" content="http://example.com/images/image-20230314140113190.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230314140248153.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230314140248153.png">
 <meta property="og:image" content="http://example.com/images/image-20230314140511776.png">
 <meta property="og:image" content="http://example.com/images/image-20230314140755727.png">
 <meta property="og:image" content="http://example.com/images/image-20230314141021243.png">
@@ -41,9 +41,9 @@
 <meta property="og:image" content="http://example.com/images/image-20230315124840655.png">
 <meta property="og:image" content="http://example.com/images/image-20230315125046442.png">
 <meta property="og:image" content="http://example.com/images/image-20230315130156100.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230315130939717.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230315131156556.png">
-<meta property="og:image" content="http://example.com/相册/typora/image-20230315131203681.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230315130939717.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230315131156556.png">
+<meta property="og:image" content="http://example.com/2024/02/01/images/image-20230315131203681.png">
 <meta property="og:image" content="http://example.com/images/image-20230315131734873.png">
 <meta property="og:image" content="http://example.com/images/image-20230315132400638.png">
 <meta property="og:image" content="http://example.com/images/image-20230315133019891.png">
@@ -60,7 +60,7 @@
 <meta property="og:image" content="http://example.com/images/image-20230316163305994.png">
 <meta property="og:image" content="http://example.com/images/image-20230316163312507.png">
 <meta property="article:published_time" content="2024-02-01T01:08:25.000Z">
-<meta property="article:modified_time" content="2024-02-01T01:09:19.562Z">
+<meta property="article:modified_time" content="2024-02-06T16:10:07.692Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="计算机组成原理">
 <meta name="twitter:card" content="summary_large_image">
@@ -374,7 +374,7 @@
 <p>（3）同步工作采用同步时标</p>
 <p><strong>5、I/O设备与主机连接方式</strong></p>
 <p>（1）辐射式连接</p>
-<img src="../../../../../相册/typora/image-20230314140248153.png" srcset="/img/loading.gif" lazyload alt="image-20230314140248153" style="zoom:67%;" />
+<img src="../images/image-20230314140248153.png" srcset="/img/loading.gif" lazyload alt="image-20230314140248153" style="zoom:67%;" />
 
 <p>每台设备都有一套控制线路和一组信号线。不便于增删设备。</p>
 <p>（2）总线连接</p>
@@ -518,11 +518,11 @@
 <ul>
 <li>  排队器输出端INTP只有一个高电平。</li>
 <li>  当某个中断源提出中断请求时，迫使比它低的中断源INTP变成低电平。</li>
-<li>  某个中断源有请求时，<img src="../../../../../相册/typora/image-20230315130939717.png" srcset="/img/loading.gif" lazyload alt="image-20230315130939717" style="zoom:67%;" />为0。</li>
+<li>  某个中断源有请求时，<img src="../images/image-20230315130939717.png" srcset="/img/loading.gif" lazyload alt="image-20230315130939717" style="zoom:67%;" />为0。</li>
 <li>  当有两个中断源同时请求时，可以通过加上上面两个输入头的与非门，可以保证只有一个输出头是高电平。</li>
 </ul>
 <p><strong>3、中断向量地址形成部件</strong></p>
-<p><img src="../../../../../相册/typora/image-20230315131156556.png" srcset="/img/loading.gif" lazyload alt="image-20230315131156556"  /><img src="../../../../../相册/typora/image-20230315131203681.png" srcset="/img/loading.gif" lazyload alt="image-20230315131203681"  /></p>
+<p><img src="../images/image-20230315131156556.png" srcset="/img/loading.gif" lazyload alt="image-20230315131156556"  /><img src="../images/image-20230315131203681.png" srcset="/img/loading.gif" lazyload alt="image-20230315131203681"  /></p>
 <p>发生中断时，需要找到中断请求的程度，也就是要找到入口地址，找到入口地址有软件和硬件方法之分。我们通过硬件向量法寻找向量地址。</p>
 <p>如上面第一幅图，排队器的输出就是向量地址，然后把向量地址去（图二）主存中找到对应的地址，该地址中保留的地址信息就是入口地址。</p>
 <p><strong>4、程序中断方式接口电路的基本组成</strong></p>

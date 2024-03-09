@@ -16,15 +16,15 @@
   <meta name="author" content="Peter Xu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="当敲代码成为一件浪漫的事，希望所有程序员每天开心，这是我的个人博客，感谢观看">
+    <meta name="description" content="Java集合集合概况   Java 集合概览    说说 List, Set, Queue, Map 四者的区别？    集合框架底层数据结构总结    如何选用集合?   List   ArrayList 和 Array（数组）的区别？   ArrayList 和 Vector 的区别?（了解即可）   Vector 和 Stack 的区别?（了解即可）   ArrayList 可以添加 nul">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试题汇总">
 <meta property="og:url" content="http://example.com/2024/01/22/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="XT-CODE-WORLD">
-<meta property="og:description" content="当敲代码成为一件浪漫的事，希望所有程序员每天开心，这是我的个人博客，感谢观看">
+<meta property="og:description" content="Java集合集合概况   Java 集合概览    说说 List, Set, Queue, Map 四者的区别？    集合框架底层数据结构总结    如何选用集合?   List   ArrayList 和 Array（数组）的区别？   ArrayList 和 Vector 的区别?（了解即可）   Vector 和 Stack 的区别?（了解即可）   ArrayList 可以添加 nul">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-22T05:43:27.000Z">
-<meta property="article:modified_time" content="2024-01-22T05:44:09.633Z">
+<meta property="article:modified_time" content="2024-02-27T16:39:20.493Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          677 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -291,7 +291,56 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="集合概况"><a href="#集合概况" class="headerlink" title="集合概况"></a>集合概况</h3><ul>
+<li><p>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#java-%E9%9B%86%E5%90%88%E6%A6%82%E8%A7%88">Java 集合概览</a></p>
+</li>
+<li><p>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E8%AF%B4%E8%AF%B4-list-set-queue-map-%E5%9B%9B%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB">说说 List, Set, Queue, Map 四者的区别？</a></p>
+</li>
+<li><p>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93">集合框架底层数据结构总结</a></p>
+</li>
+<li><p>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E5%A6%82%E4%BD%95%E9%80%89%E7%94%A8%E9%9B%86%E5%90%88">如何选用集合?</a></p>
+</li>
+</ul>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraylist-%E5%92%8C-array-%E6%95%B0%E7%BB%84-%E7%9A%84%E5%8C%BA%E5%88%AB">ArrayList 和 Array（数组）的区别？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraylist-%E5%92%8C-vector-%E7%9A%84%E5%8C%BA%E5%88%AB-%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF">ArrayList 和 Vector 的区别?（了解即可）</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#vector-%E5%92%8C-stack-%E7%9A%84%E5%8C%BA%E5%88%AB-%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF">Vector 和 Stack 的区别?（了解即可）</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraylist-%E5%8F%AF%E4%BB%A5%E6%B7%BB%E5%8A%A0-null-%E5%80%BC%E5%90%97">ArrayList 可以添加 null 值吗？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraylist-%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">ArrayList 插入和删除元素的时间复杂度？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#linkedlist-%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">LinkedList 插入和删除元素的时间复杂度？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#linkedlist-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%AE%9E%E7%8E%B0-randomaccess-%E6%8E%A5%E5%8F%A3">LinkedList 为什么不能实现 RandomAccess 接口？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraylist-%E4%B8%8E-linkedlist-%E5%8C%BA%E5%88%AB">ArrayList 与 LinkedList 区别?</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9-randomaccess-%E6%8E%A5%E5%8F%A3">补充内容:RandomAccess 接口</a></li>
+</ul>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#comparable-%E5%92%8C-comparator-%E7%9A%84%E5%8C%BA%E5%88%AB">Comparable 和 Comparator 的区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E6%97%A0%E5%BA%8F%E6%80%A7%E5%92%8C%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%80%A7%E7%9A%84%E5%90%AB%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88">无序性和不可重复性的含义是什么</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E6%AF%94%E8%BE%83-hashset%E3%80%81linkedhashset-%E5%92%8C-treeset-%E4%B8%89%E8%80%85%E7%9A%84%E5%BC%82%E5%90%8C">比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同</a></li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#queue-%E4%B8%8E-deque-%E7%9A%84%E5%8C%BA%E5%88%AB">Queue 与 Deque 的区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arraydeque-%E4%B8%8E-linkedlist-%E7%9A%84%E5%8C%BA%E5%88%AB">ArrayDeque 与 LinkedList 的区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E8%AF%B4%E4%B8%80%E8%AF%B4-priorityqueue">说一说 PriorityQueue</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-blockingqueue">什么是 BlockingQueue？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#arrayblockingqueue-%E5%92%8C-linkedblockingqueue-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">ArrayBlockingQueue 和 LinkedBlockingQueue 有什么区别？</a></li>
+</ul>
+<h3 id="Map（重要）"><a href="#Map（重要）" class="headerlink" title="Map（重要）"></a>Map（重要）</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E5%92%8C-hashtable-%E7%9A%84%E5%8C%BA%E5%88%AB">HashMap 和 Hashtable 的区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E5%92%8C-hashset-%E5%8C%BA%E5%88%AB">HashMap 和 HashSet 区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E5%92%8C-treemap-%E5%8C%BA%E5%88%AB">HashMap 和 TreeMap 区别</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashset-%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5%E9%87%8D%E5%A4%8D">HashSet 如何检查重复?</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E7%9A%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-2-%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9">HashMap 的长度为什么是 2 的幂次方</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">HashMap 的底层实现</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E7%9A%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-2-%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9">HashMap 的长度为什么是 2 的幂次方</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C%E5%AF%BC%E8%87%B4%E6%AD%BB%E5%BE%AA%E7%8E%AF%E9%97%AE%E9%A2%98">HashMap 多线程操作导致死循环问题</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-02.html#hashmap-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8">HashMap 为什么线程不安全？</a></li>
+</ul>
+<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li>  <a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/1_base/tcp_ip_model.html#_2-1-tcp-ip-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E5%87%A0%E5%B1%82">TCP/IP 网络模型有哪几层？</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/1_base/what_happen_url.html#_2-2-%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E7%BD%91%E9%A1%B5%E6%98%BE%E7%A4%BA-%E6%9C%9F%E9%97%B4%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">键入网址到网页显示，期间发生了什么？</a></li>
+<li></li>
+</ul>
+
                 
               </div>
             
@@ -381,9 +430,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/23/%E8%AE%B0%E5%BD%9524-1%E6%9C%88/" title="记录24-1月">
+                      <a href="/2024/01/23/MIS-Family%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" title="MIS-Family项目笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">记录24-1月</span>
+                        <span class="hidden-mobile">MIS-Family项目笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

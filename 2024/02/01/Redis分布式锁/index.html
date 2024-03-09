@@ -24,14 +24,14 @@
 <meta property="og:description" content="分布式锁——Redis实现方式Redis分布式锁的实现核心思路 获取锁：  互斥：确保只能有一个线程获取锁 非阻塞：尝试一次，成功返回true，失败返回false   释放锁：  手动释放 超时释放：获取锁时添加一个超时时间（必须添加）    我们利用redis 的setNx 方法，当有多个线程进入时，我们就利用该方法，第一个线程进入时，redis 中就有这个key 了，返回了1，如果结果是1，则">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/1656079017728.png">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653385920025.png?lastModify=1706753347">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653387398820.png?lastModify=1706753347">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653387764938.png?lastModify=1706753347">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653546736063.png?lastModify=1706753347">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653548087334.png?lastModify=1706753347">
-<meta property="og:image" content="file://D:/Codefield/projects/selfBlog/source/images/1653553093967.png?lastModify=1706753347">
+<meta property="og:image" content="http://example.com/images/image-20240206235653618.png">
+<meta property="og:image" content="http://example.com/images/1653387398820.png">
+<meta property="og:image" content="http://example.com/images/1653387764938.png?lastModify=1706753347">
+<meta property="og:image" content="http://example.com/images/1653546736063.png?lastModify=1706753347">
+<meta property="og:image" content="http://example.com/images/1653548087334.png?lastModify=1706753347">
+<meta property="og:image" content="http://example.com/images/1653553093967.png?lastModify=1706753347">
 <meta property="article:published_time" content="2024-02-01T02:17:09.000Z">
-<meta property="article:modified_time" content="2024-02-01T03:01:58.063Z">
+<meta property="article:modified_time" content="2024-03-09T18:52:21.506Z">
 <meta property="article:author" content="Peter Xu">
 <meta property="article:tag" content="分布式锁">
 <meta name="twitter:card" content="summary_large_image">
@@ -334,7 +334,7 @@
 
 <h2 id="分布式锁常出现的问题"><a href="#分布式锁常出现的问题" class="headerlink" title="分布式锁常出现的问题"></a>分布式锁常出现的问题</h2><p>（1）执行时间大于过期时间，导致另外线程占用锁（拉屎的时候别人冲进来）（续期）</p>
 <p>（2）接上面的场景，执行完后处理删除线程时误删除别人的锁，导致后来线程又加锁。（在释放锁的时候判断是不是自己的锁）</p>
-<p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653385920025.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653385920025"></p>
+<p><img src="/../images/image-20240206235653618.png" srcset="/img/loading.gif" lazyload alt="image-20240206235653618"></p>
 <p>（3）在进行释放锁代码的时候已经通过了是不是自己的锁的验证，这时候别的线程又进来了加锁，导致当前线程把新线程的锁删除。</p>
 <p>（4）Redis如果时集群怎么保证数据一致性。</p>
 <h2 id="解决分布式锁的误删除问题"><a href="#解决分布式锁的误删除问题" class="headerlink" title="解决分布式锁的误删除问题"></a>解决分布式锁的误删除问题</h2><p>在获取锁时存入线程标示（可以用UUID表示）在释放锁时先获取锁中的线程标示，判断是否与当前线程标示一致</p>
@@ -342,7 +342,7 @@
 <li>如果一致则释放锁</li>
 <li>如果不一致则不释放锁</li>
 </ul>
-<p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653387398820.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653387398820"></p>
+<p><img src="/../images/1653387398820.png" srcset="/img/loading.gif" lazyload alt="1653387398820"></p>
 <p>具体代码如下：加锁</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ID_PREFIX</span> <span class="hljs-operator">=</span> UUID.randomUUID().toString(<span class="hljs-literal">true</span>) + <span class="hljs-string">&quot;-&quot;</span>;<br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryLock</span><span class="hljs-params">(<span class="hljs-type">long</span> timeoutSec)</span> &#123;<br>   <span class="hljs-comment">// 获取线程标示</span><br>   <span class="hljs-type">String</span> <span class="hljs-variable">threadId</span> <span class="hljs-operator">=</span> ID_PREFIX + Thread.currentThread().getId();<br>   <span class="hljs-comment">// 获取锁</span><br>   <span class="hljs-type">Boolean</span> <span class="hljs-variable">success</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForValue()<br>                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);<br>   <span class="hljs-keyword">return</span> Boolean.TRUE.equals(success);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -351,7 +351,7 @@
 
 <h2 id="分布式锁的原子性问题"><a href="#分布式锁的原子性问题" class="headerlink" title="分布式锁的原子性问题"></a>分布式锁的原子性问题</h2><p>也就上面我们提到的第三个问题</p>
 <p>线程1现在持有锁之后，在执行业务逻辑过程中，他正准备删除锁，而且已经走到了条件判断的过程中，比如他已经拿到了当前这把锁确实是属于他自己的，正准备删除锁，但是此时他的锁到期了，那么此时线程2进来，但是线程1他会接着往后执行，当他卡顿结束后，他直接就会执行删除锁那行代码，相当于条件判断并没有起到作用，这就是删锁时的原子性问题，之所以有这个问题，是因为线程1的拿锁，比锁，删锁，实际上并不是原子性的，我们要防止刚才的情况发生，</p>
-<p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653387764938.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653387764938"></p>
+<p><img src="/../images/1653387764938.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653387764938"></p>
 <p> Lua脚本解决多条命令原子性问题（了解即可）<a target="_blank" rel="noopener" href="https://www.runoob.com/lua/lua-tutorial.html">https://www.runoob.com/lua/lua-tutorial.html</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>基于Redis的分布式锁实现思路：</p>
 <ul>
@@ -372,7 +372,7 @@
 <p><strong>超时释放：</strong>我们在加锁时增加了过期时间，这样的我们可以防止死锁，但是如果卡顿的时间超长，虽然我们采用了lua表达式防止删锁的时候，误删别人的锁，但是毕竟没有锁住，有安全隐患</p>
 <p><strong>主从一致性：</strong> 如果Redis提供了主从集群，当我们向集群写数据时，主机需要异步的将数据同步给从机，而万一在同步过去之前，主机宕机了，就会出现死锁问题。</p>
 <p>Redission提供了许多分布式锁的功能：</p>
-<p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653546736063.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653546736063"></p>
+<p><img src="/../images/1653546736063.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653546736063"></p>
 <h2 id="Redission快速入门"><a href="#Redission快速入门" class="headerlink" title="Redission快速入门"></a>Redission快速入门</h2><p>引入依赖：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>	&lt;groupId&gt;org.redisson&lt;/groupId&gt;<br>	&lt;artifactId&gt;redisson&lt;/artifactId&gt;<br>	&lt;version&gt;<span class="hljs-number">3.13</span><span class="hljs-number">.6</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
 
@@ -386,9 +386,9 @@
 <p>注入RedissonClient</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Resource</span><br><span class="hljs-keyword">private</span> RedissonClient redissonClient;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">seckillVoucher</span><span class="hljs-params">(Long voucherId)</span> &#123;<br>        <span class="hljs-comment">// 1.查询优惠券</span><br>        <span class="hljs-type">SeckillVoucher</span> <span class="hljs-variable">voucher</span> <span class="hljs-operator">=</span> seckillVoucherService.getById(voucherId);<br>        <span class="hljs-comment">// 2.判断秒杀是否开始</span><br>        <span class="hljs-keyword">if</span> (voucher.getBeginTime().isAfter(LocalDateTime.now())) &#123;<br>            <span class="hljs-comment">// 尚未开始</span><br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;秒杀尚未开始！&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 3.判断秒杀是否已经结束</span><br>        <span class="hljs-keyword">if</span> (voucher.getEndTime().isBefore(LocalDateTime.now())) &#123;<br>            <span class="hljs-comment">// 尚未开始</span><br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;秒杀已经结束！&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 4.判断库存是否充足</span><br>        <span class="hljs-keyword">if</span> (voucher.getStock() &lt; <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-comment">// 库存不足</span><br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;库存不足！&quot;</span>);<br>        &#125;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">//创建锁对象 这个代码不用了，因为我们现在要使用分布式锁</span><br>        <span class="hljs-comment">//SimpleRedisLock lock = new SimpleRedisLock(&quot;order:&quot; + userId, stringRedisTemplate);</span><br>        <span class="hljs-type">RLock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> redissonClient.getLock(<span class="hljs-string">&quot;lock:order:&quot;</span> + userId);<br>        <span class="hljs-comment">//获取锁对象</span><br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isLock</span> <span class="hljs-operator">=</span> lock.tryLock();<br>       <br>		<span class="hljs-comment">//加锁失败</span><br>        <span class="hljs-keyword">if</span> (!isLock) &#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;不允许重复下单&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//获取代理对象(事务)</span><br>            <span class="hljs-type">IVoucherOrderService</span> <span class="hljs-variable">proxy</span> <span class="hljs-operator">=</span> (IVoucherOrderService) AopContext.currentProxy();<br>            <span class="hljs-keyword">return</span> proxy.createVoucherOrder(voucherId);<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">//释放锁</span><br>            lock.unlock();<br>        &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="redission可重入锁"><a href="#redission可重入锁" class="headerlink" title="redission可重入锁"></a>redission可重入锁</h2><p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653548087334.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653548087334"></p>
+<h2 id="redission可重入锁"><a href="#redission可重入锁" class="headerlink" title="redission可重入锁"></a>redission可重入锁</h2><p><img src="/../images/1653548087334.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653548087334"></p>
 <h2 id="redission锁重试和WatchDog机制"><a href="#redission锁重试和WatchDog机制" class="headerlink" title="redission锁重试和WatchDog机制"></a>redission锁重试和WatchDog机制</h2><p>Redisson提供的分布式锁是支持锁自动续期的，</p>
-<h2 id="redission锁的MutiLock原理"><a href="#redission锁的MutiLock原理" class="headerlink" title="redission锁的MutiLock原理"></a>redission锁的MutiLock原理</h2><p><img src="file://D:/Codefield/projects/selfBlog/source/images/1653553093967.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653553093967"></p>
+<h2 id="redission锁的MutiLock原理"><a href="#redission锁的MutiLock原理" class="headerlink" title="redission锁的MutiLock原理"></a>redission锁的MutiLock原理</h2><p><img src="/../images/1653553093967.png?lastModify=1706753347" srcset="/img/loading.gif" lazyload alt="1653553093967"></p>
 
                 
               </div>
@@ -409,6 +409,13 @@
         
   <a href="/categories/Redis/" class="category-chain-item">Redis</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Redis/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
   
 
       </span>
@@ -479,9 +486,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Docker/" title="微服务学习（二）——Docker">
+                      <a href="/2024/02/01/%E9%A1%B9%E7%9B%AEidea/" title="项目idea">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微服务学习（二）——Docker</span>
+                        <span class="hidden-mobile">项目idea</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

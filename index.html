@@ -243,15 +243,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" target="_self">
-          梯度下降法
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89/" target="_self">
+          SpringCloud学习（八）————多级缓存
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89/" target="_self">
         <div>
-          梯度下降数学意义梯度就是方向向量最大。那么梯度下降就是根据方向导数最大的方向寻找局部最优解。  通过更新x来寻找局部最小值，梯度下降的公式即为：$$x=x-\alpha*\frac{df(x)}{dx}$$其中的$\alpha$成为学习率，越小则下降的幅度越小，反之越大。 注意：$\alpha$不能够太大，因为当遍历到最小值的时候，可能会导致越过了最小值。 二元函数的梯度下降 多元函数的梯度就是对
+          多级缓存0.学习目标1.什么是多级缓存传统的缓存策略一般是请求到达Tomcat后，先查询Redis，如果未命中则查询数据库，如图：  存在下面的问题： •请求要经过Tomcat处理，Tomcat的性能成为整个系统的瓶颈 •Redis缓存失效时，会对数据库产生冲击 多级缓存就是充分利用请求处理的每个环节，分别添加缓存，减轻Tomcat压力，提升服务性能：  浏览器访问静态资源时，优先读取浏览器本地缓
         </div>
       </a>
 
@@ -259,8 +259,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 16:41" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:18" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -275,12 +275,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -297,7 +297,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/">#梯度下降法</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">#多级缓存</a>
             
           </div>
         
@@ -311,15 +311,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E9%A1%B9%E7%9B%AEidea/" target="_self">
-          项目idea
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89/" target="_self">
+          SpringCloud学习（七）————Redis集群
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E9%A1%B9%E7%9B%AEidea/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89/" target="_self">
         <div>
-          projectcomponent   mybatisplus运行时显示sql语句
+          Redis集群本章是基于CentOS7下的Redis集群教程，包括：  单机安装Redis Redis主从 Redis分片集群  1.单机安装Redis首先需要安装Redis所需要的依赖： 1yum install -y gcc tcl    然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：  例如，我放到了/tmp目录：  解压缩： 1tar -xvf redis-6.2.4.tar
         </div>
       </a>
 
@@ -327,8 +327,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 14:24" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:15" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -343,12 +343,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E9%A1%B9%E7%9B%AE/idea/" class="category-chain-item">idea</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -365,7 +365,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/idea/">#idea</a>
+              <a href="/tags/Redis%E9%9B%86%E7%BE%A4/">#Redis集群</a>
             
           </div>
         
@@ -379,15 +379,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Docker/" target="_self">
-          微服务学习（二）——Docker
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/" target="_self">
+          SpringCloud学习（六）————Seata
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Docker/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/" target="_self">
         <div>
-          Docker 将应用的Libs（函数库）、Deps（依赖）、配置与应用一起打包  将每个应用放到一个隔离容器去运行，避免互相干扰    操作系统版本也会有差异，怎么解决这些问题呢？  Docker如何解决大型项目依赖关系复杂，不同组件依赖的兼容性问题？  Docker允许开发中将应用、依赖、函数库、配置一起打包，形成可移植镜像 Docker应用运行在容器中，使用沙箱机制，相互隔离    Docke
+          seata的部署和集成一、部署Seata的tc-server1.下载首先我们要下载seata-server包，地址在http://seata.io/zh-cn/blog/download.html  当然，课前资料也准备好了：  2.解压在非中文目录解压缩这个zip包，其目录结构如下：  3.修改配置修改conf目录下的registry.conf文件：  内容如下： 123456789101112
         </div>
       </a>
 
@@ -395,8 +395,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 13:47" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:11" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -411,12 +411,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="category-chain-item">微服务</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/" class="category-chain-item">Docker</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -433,7 +433,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/docker/">#docker</a>
+              <a href="/tags/Seata/">#Seata</a>
             
           </div>
         
@@ -447,15 +447,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
-          Redis分布式锁
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/" target="_self">
+          SpringCloud学习（五）————微服务保护
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/" target="_self">
         <div>
-          分布式锁——Redis实现方式Redis分布式锁的实现核心思路 获取锁：  互斥：确保只能有一个线程获取锁 非阻塞：尝试一次，成功返回true，失败返回false   释放锁：  手动释放 超时释放：获取锁时添加一个超时时间（必须添加）    我们利用redis 的setNx 方法，当有多个线程进入时，我们就利用该方法，第一个线程进入时，redis 中就有这个key 了，返回了1，如果结果是1，则
+          微服务保护1.初识Sentinel1.1.雪崩问题及解决方案1.1.1.雪崩问题微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。   如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。   但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请
         </div>
       </a>
 
@@ -463,8 +463,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 10:17" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:11" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -479,8 +479,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Redis/" class="category-chain-item">Redis</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
+  
+  
+
   
 
       </span>
@@ -494,7 +501,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">#分布式锁</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4/">#微服务保护</a>
             
           </div>
         
@@ -508,15 +515,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83%E7%9A%84%E5%8A%9F%E8%83%BD/" target="_self">
-          控制单元的功能
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+          SpringCloud学习（四）————ElasticSearch
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83%E7%9A%84%E5%8A%9F%E8%83%BD/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
         <div>
-          控制单元的功能微操作命令的分析这一篇主要就是讲指令周期的4个阶段的具体操作过程。 取值周期 间址周期 执行周期     中断周期 控制单元的功能外特性 1、输入信号（1）时钟 （2）指令寄存器 （3）标志 （4）外来信号
+          分布式搜索引擎01– elasticsearch基础 0.学习目标1.初识elasticsearch1.1.了解ES1.1.1.elasticsearch的作用elasticsearch是一款非常强大的开源搜索引擎，具备非常多强大功能，可以帮助我们从海量数据中快速找到需要的内容 例如：  在GitHub搜索代码     在电商网站搜索商品     在百度搜索答案     在打车软件搜索附近的车
         </div>
       </a>
 
@@ -524,8 +531,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:13" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:06" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -540,12 +547,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -562,7 +569,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/ElasticSearch/">#ElasticSearch</a>
             
           </div>
         
@@ -576,15 +583,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/CPU%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD/" target="_self">
-          CPU的结构和功能
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+          SpringCloud学习（三）————RabbitMQ
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/CPU%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
         <div>
-          CPU的结构和功能CPU结构CPU的功能CPU是实质上是包括了运算器和控制器两部分，前面讲解了运算器的硬件配置这里我们重点介绍控制器的功能：    取指令  自动形成指令地址；自动发出取指令的命令。    分析指令  操作码译码    执行指令  根据分析指令得到的“操作命令”和“操作数地址”，操作各种器件。 CPU的结构通过功能，要想实现取指令，必须要有一个寄存器专用于存放当前指令的地址，要分析
+          RabbitMQ1.初识MQ1.1.同步和异步通讯微服务间通讯有同步和异步两种方式： 同步通讯：就像打电话，需要实时响应。 异步通讯：就像发邮件，不需要马上回复。  两种方式各有优劣，打电话可以立即得到响应，但是你却不能跟多个人同时通话。发送邮件可以同时与多个人收发邮件，但是往往响应会有延迟。 1.1.1.同步通讯我们之前学习的Feign调用就属于同步方式，虽然调用可以实时得到结果，但存在下面的问
         </div>
       </a>
 
@@ -592,8 +599,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:12" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:05" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -608,12 +615,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -630,7 +637,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/RabbitMQ/">#RabbitMQ</a>
             
           </div>
         
@@ -644,15 +651,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" target="_self">
-          指令系统
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          SpringCloud学习（二）————Docker
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
         <div>
-          指令系统机器指令   什么是机器指令，指令系统又是什么？  人们把机器语言的语句叫做机器指令，把这些指令集合叫做指令系统。 指令的一般格式指令是由操作码和地址码两部分组成的。（都是通过二进制描述） 1、操作码   操作码是用来说明这条指令是用来完成什么样的操作的。   操作长度可以是固定的也可以是变化的。如果是固定的，便于硬件的设计，指令译码时间短，广泛运用于字长较长的计算机，如RISC。   如
+          Docker实用篇0.学习目标1.初识Docker1.1.什么是Docker微服务虽然具备各种各样的优势，但服务的拆分通用给部署带来了很大的麻烦。  分布式系统中，依赖的组件非常多，不同组件之间部署时往往会产生一些冲突。 在数百上千台服务中重复部署，环境不一定一致，会遇到各种问题  1.1.1.应用部署的环境问题大型项目组件较多，运行环境也较为复杂，部署时会碰到一些问题：  依赖关系复杂，容易出现
         </div>
       </a>
 
@@ -660,8 +667,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:11" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:03" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -676,12 +683,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -698,7 +705,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/Docker/">#Docker</a>
             
           </div>
         
@@ -712,15 +719,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95/" target="_self">
-          计算机运算方法
+        <a href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+          SpringCloud（一）————注册中心、Gateway
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/SpringCloud%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
         <div>
-          计算机的运算方法 无符号数和有符号数计算机中参与运算的主要的数主要有两大类：无符号数和有符号数。 无符号数计算机中的数通常是存储在寄存器上的，寄存器的位数就是机器字长。当机器字长相同时，无符号数和有符号数的数值范围是不一样的。因为有符号数有一位存储符号。 有符号数对于有符号数，用0代表正数，1代表负数。 1、机器数和真数 2、原码表示法（1）整数原码 整数的符号位和数值位之间用逗号分隔，小数的符号
+          SpringCloud011.认识微服务随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？ 1.0.学习目标了解微服务架构的优缺点 1.1.单体架构单体架构：将业务的所有功能集中在一个项目中开发，打成一个包部署。  单体架构的优缺点如下： 优点：  架构简单 部署成本低  缺点：  耦合度高（维护困难、升级困难）  1.2
         </div>
       </a>
 
@@ -728,8 +735,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:09" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 03:00" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -744,12 +751,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/SpringCloud/" class="category-chain-item">SpringCloud</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/SpringCloud/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -766,7 +773,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/">#注册中心</a>
             
           </div>
         
@@ -780,15 +787,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/" target="_self">
-          输入输出系统
+        <a href="/2024/03/10/Netty%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+          Netty学习（四）
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/Netty%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
         <div>
-          输入输出系统概述输入输出系统的发展概况发展分为4个阶段： 1、早期阶段    IO设备与主存之间交换信息都必须通过CPU，这个阶段下每个IO设备都需要一套逻辑电路和CPU连接，这样使得线路十分分散、庞杂。   IO设备与CPU之间是串行方式工作的。   更换IO设备非常困难。   利用程序查询方式。  2、接口模块和DMA阶段    这个时候采用了总线连接。   IO设备之间可以实现并行工作方式
+          四. 优化与源码1. 优化1.1 扩展序列化算法序列化，反序列化主要用在消息正文的转换上  序列化时，需要将 Java 对象变为要传输的数据（可以是 byte[]，或 json 等，最终都需要变成 byte[]） 反序列化时，需要将传入的正文数据还原成 Java 对象，便于处理  目前的代码仅支持 Java 自带的序列化，反序列化机制，核心代码如下 1234567891011// 反序列化byte
         </div>
       </a>
 
@@ -796,8 +803,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:08" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 02:13" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -812,12 +819,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/Netty/" class="category-chain-item">Netty</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/Netty/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -834,7 +841,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/Netty/">#Netty</a>
             
           </div>
         
@@ -848,15 +855,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/02/01/%E5%AD%98%E5%82%A8%E5%99%A8/" target="_self">
-          存储器
+        <a href="/2024/03/10/Netty%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+          Netty学习（三）
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E5%AD%98%E5%82%A8%E5%99%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/10/Netty%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
         <div>
-          存储器概述存储器分类  按存储介质分类  （1）半导体存储器 （2）磁表面存储器 （3）磁芯存储器 （4）光盘存储器   按照存取方式分类  （1）随机存储器（RAM） ​    RAM是一种可读可写的存储器，其特点是对存储器的任何一个存储单元的内容都可以随机存取。RAM又分为静态RAM（用触发器寄存信息）和动态RAM（以电容充放电原理寄存信息）。 （2）只读存储器（ROM） （3）串行访问存储器
+          三. Netty 进阶1. 粘包与半包1.1 粘包现象服务端代码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546public class HelloWorldServer &#123;    static final Logger log = LoggerFactory.getL
         </div>
       </a>
 
@@ -864,8 +871,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-01 09:07" pubdate>
-              2024-02-01
+            <time datetime="2024-03-10 02:13" pubdate>
+              2024-03-10
             </time>
           </div>
         
@@ -880,12 +887,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/Netty/" class="category-chain-item">Netty</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/Netty/%E8%B5%84%E6%96%99/" class="category-chain-item">资料</a>
   
   
 
@@ -902,7 +909,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+              <a href="/tags/Netty/">#Netty</a>
             
           </div>
         
@@ -914,7 +921,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
